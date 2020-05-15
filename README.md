@@ -11,7 +11,7 @@ Using the provided starter code, you'll build a React/Redux front end for the ap
 There are two types of objects stored in our database:
 
 * Users
-* Questions
+* QuestionPage
 
 ### Users
 
@@ -25,9 +25,9 @@ Users include:
 | questions | Array | A list of ids of the polling questions this user created|
 | answers      | Object         |  The object's keys are the ids of each question this user answered. The value of each key is the answer the user selected. It can be either `'optionOne'` or `'optionTwo'` since each question has two options.
 
-### Questions
+### QuestionPage
 
-Questions include:
+QuestionPage include:
 
 | Attribute | Type | Description |
 |-----------------|------------------|-------------------|
