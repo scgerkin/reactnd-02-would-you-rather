@@ -30,7 +30,6 @@ export function handleAddQuestion(optionOne, optionTwo) {
 }
 
 function vote(info) {
-  console.log("Vote called");
   return {
     type: VOTE,
     info
@@ -38,7 +37,6 @@ function vote(info) {
 }
 
 export function handleVote(authedUser, qid, answer) {
-  console.log("Handle Vote called");
   return (dispatch) => {
 
     const info = {
@@ -47,11 +45,22 @@ export function handleVote(authedUser, qid, answer) {
       answer
     }
 
-    dispatch(vote(info));
-    return saveQuestionAnswer(info).catch((error) => {
-      //todo switch answer back off on error
-      console.warn("Error in saveQuestionAnswer: ", error);
-      alert("There was an error answering the question.");
-    })
+    //todo handle this optimistically
+    return saveQuestionAnswer(info)
+        .then(dispatch(vote(info)))
+        .catch((error) => {
+          handleErrorOnSaveQuestionAnswer(error);
+        });
   }
+}
+
+//todo Needs to reset the vote back to previous state once optimistic handling
+// is implemented
+// Will need to:
+// 1. Grab state before dispatch(vote(info)) somehow
+// 2. Give that information to this function
+// 3. Call dispatch with the old info
+function handleErrorOnSaveQuestionAnswer(error) {
+  console.warn("Error in saveQuestionAnswer: ", error);
+  alert("There was an error answering the question.");
 }
