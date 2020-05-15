@@ -14,6 +14,6 @@ export function handleInitialData() {
           dispatch(receiveUsers(users));
           dispatch(receiveQuestions(questions));
           dispatch(setAuthedUser(AUTHED_ID));
-        })
+        });
   }
 }
