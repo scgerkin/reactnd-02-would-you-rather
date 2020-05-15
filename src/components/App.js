@@ -22,8 +22,8 @@ class App extends Component {
             <NavContainer/>
             <div>
               <Route exact path={"/"} component={Home}/>
-              <Route path={"/questions"} component={QuestionPage}/>
-              <Route path={"/questions/create"} component={NewQuestion}/>
+              <Route exact path={"/questions"} component={QuestionPage}/>
+              <Route exact path={"/questions/create"} component={NewQuestion}/>
               <Route path={"/leaderboard"} component={Leaderboard}/>
               <Route path={"/auth"} component={Auth}/>
             </div>

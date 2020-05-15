@@ -12,7 +12,10 @@ class NavContainer extends React.Component {
             <LinkContainer exact to={"/"}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
-            <LinkContainer to={"/questions/create"}>
+            <LinkContainer exact to={"/questions"}>
+              <Nav.Link>Questions</Nav.Link>
+            </LinkContainer>
+            <LinkContainer exact to={"/questions/create"}>
               <Nav.Link>New Question</Nav.Link>
             </LinkContainer>
             <LinkContainer to={"/leaderboard"}>
