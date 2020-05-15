@@ -4,6 +4,8 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 
+//consider changing column display? not sure about question flow
+// should probably select a question -> go to question -> then edit from there
 class NewQuestion extends Component {
   render() {
     return (
