@@ -1,8 +1,12 @@
 import {ADD_QUESTION, RECEIVE_QUESTIONS, VOTE} from "../actions/questions";
 
+/**
+ * Handles Question actions with the state.
+ * @param state The current state (default empty object)
+ * @param action The current action.
+ * @returns A new state with updated action items.
+ */
 export default function questions(state = {}, action) {
-  console.log("Reducer called");
-
   switch (action.type) {
     case RECEIVE_QUESTIONS:
       return handleReceiveQuestions(state, action);
@@ -15,6 +19,12 @@ export default function questions(state = {}, action) {
   }
 }
 
+/**
+ * Handles adding questions from the database at initialization.
+ * @param state The current state.
+ * @param action The current action containing the questions retrieved .
+ * @returns The updated state containing the questions retrieved.
+ */
 function handleReceiveQuestions(state, action) {
   return {
     ...state,
@@ -22,6 +32,12 @@ function handleReceiveQuestions(state, action) {
   };
 }
 
+/**
+ * Handles creating a new Question by adding it to the existing state.
+ * @param state The current state.
+ * @param action The current action containing the new question.
+ * @returns The updated state containing the newly created question.
+ */
 function handleAddQuestion(state, action) {
   const {question} = action;
   return {
@@ -33,8 +49,8 @@ function handleAddQuestion(state, action) {
 /**
  * Handles a user selecting which option to vote for.
  * FIXME: This function is a hot mess.
- * @param state The current state
- * @param action The current action
+ * @param state The current state.
+ * @param action The current action.
  * @return The updated state with a vote appended to the correct choice.
  */
 function handleVoteState(state, action) {
@@ -58,7 +74,7 @@ function handleVoteState(state, action) {
       throw new Error(`Error in VOTE Reducer - Invalid vote selection: '${info.answer}'`);
   }
 
-  // return the updated state
+  // return the state, this overwrites the existing question with a new object
   return {
     ...state,
     [info.qid]: {
