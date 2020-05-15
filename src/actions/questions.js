@@ -2,7 +2,7 @@ import {saveQuestion, saveQuestionAnswer} from "../utils/api";
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
 export const ADD_QUESTION = "ADD_QUESTION";
-export const ADD_QUESTION_ANSWER = "ADD_QUESTION_ANSWER";
+export const VOTE = "VOTE";
 
 export function receiveQuestions(questions) {
   return {
@@ -29,19 +29,27 @@ export function handleAddQuestion(optionOne, optionTwo) {
   }
 }
 
-function addQuestionAnswer({qid, authedUser, option}) {
+function vote(info) {
+  console.log("Vote called");
   return {
-    type: ADD_QUESTION_ANSWER,
-    qid,
-    authedUser,
-    option
+    type: VOTE,
+    info
   }
 }
 
-export function handleAddQuestionAnswer(info) {
+export function handleVote(authedUser, qid, answer) {
+  console.log("Handle Vote called");
   return (dispatch) => {
-    dispatch(addQuestionAnswer(info));
+
+    const info = {
+      authedUser,
+      qid,
+      answer
+    }
+
+    dispatch(vote(info));
     return saveQuestionAnswer(info).catch((error) => {
+      //todo switch answer back off on error
       console.warn("Error in saveQuestionAnswer: ", error);
       alert("There was an error answering the question.");
     })

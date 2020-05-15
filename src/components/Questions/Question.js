@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import {handleVote} from "../../actions/questions";
 
 //todo Styling is hacky as a button, might need custom css
 class Question extends Component {
@@ -11,9 +12,12 @@ class Question extends Component {
   }
 
   _onOptionChange(option) {
+    const {dispatch, authedUser} = this.props;
+
     this.setState({
       option: option
     });
+    dispatch(handleVote(authedUser, this.props.id, option));
   }
 
   render() {
