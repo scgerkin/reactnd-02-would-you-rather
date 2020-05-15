@@ -37,9 +37,9 @@ Each subsection includes the criteria for that portion (parent list item) of the
 - Are the details of each poll displayed with all of the relevant information?
     1. The details of the poll are available at `questions/:question_id`.
     1. When a poll is clicked on the home page, the following is shown:
-    the text “Would You Rather”;
-    the picture of the user who posted the polling question; and
-    the two options.
+        - The text “Would You Rather”
+        - The picture of the user who posted the polling question
+        - The two options
     1. For answered polls, each of the two options contains the following:
     the text of the option;
     the number of people who voted for that option;

@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar";
 import {LinkContainer} from 'react-router-bootstrap';
 
-export class NavContainer extends React.Component {
+class NavContainer extends React.Component {
   render() {
     return (
         <Navbar bg={"dark"} variant={"dark"}>
@@ -12,8 +12,8 @@ export class NavContainer extends React.Component {
             <LinkContainer exact to={"/"}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
-            <LinkContainer to={"/questions"}>
-              <Nav.Link>Questions</Nav.Link>
+            <LinkContainer to={"/questions/create"}>
+              <Nav.Link>New Question</Nav.Link>
             </LinkContainer>
             <LinkContainer to={"/leaderboard"}>
               <Nav.Link>Leader Board</Nav.Link>
@@ -29,3 +29,5 @@ export class NavContainer extends React.Component {
     )
   }
 }
+
+export default NavContainer;
