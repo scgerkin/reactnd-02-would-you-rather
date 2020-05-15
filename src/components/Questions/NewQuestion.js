@@ -1,12 +1,47 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
+import {handleAddQuestion} from "../../actions/questions";
+
+const QUESTION_ONE = "QUESTION_ONE";
+const QUESTION_TWO = "QUESTION_TWO";
 
 //consider changing column display? not sure about question flow
 // should probably select a question -> go to question -> then edit from there
 class NewQuestion extends Component {
+  state = {
+    optionOne: "",
+    optionTwo: ""
+  }
+
+  handleChange = (event) => {
+    const value = event.target.value;
+    switch (event.target.id) {
+      case QUESTION_ONE:
+        this.setState((currentState) => ({
+          optionOne: value,
+          optionTwo: currentState.optionTwo
+        }));
+        break;
+      case QUESTION_TWO:
+        this.setState((currentState) => ({
+          optionOne: currentState.optionOne,
+          optionTwo: value
+        }));
+        break;
+      default:
+        break;
+    }
+  }
+
+  handleSubmit = (event) => {
+    const {dispatch} = this.props;
+    dispatch(handleAddQuestion(this.state.optionOne, this.state.optionTwo));
+  }
+
   render() {
     return (
         <Container className={"mc-auto"}>
@@ -16,20 +51,27 @@ class NewQuestion extends Component {
             <Card.Body>
               <Form>
                 <Card.Text as={"div"}>
-                  <Form.Group controlId={"questionOne"}>
-                    <Form.Control type={"text"} placeholder={"Question one..."}/>
-                  </Form.Group>
+                  <Form.Control
+                      id={QUESTION_ONE}
+                      type={"text"}
+                      placeholder={"Question one..."}
+                      onChange={this.handleChange}
+                  />
                 </Card.Text>
                 <Card.Text as={"div"}>
                   OR
                 </Card.Text>
                 <Card.Text as={"div"}>
-                  <Form.Group controlId={"questionTwo"}>
-                    <Form.Control type={"text"} placeholder={"Question two..."}/>
-                  </Form.Group>
+
+                  <Form.Control
+                      id={QUESTION_TWO}
+                      type={"text"}
+                      placeholder={"Question two..."}
+                      onChange={this.handleChange}
+                  />
                 </Card.Text>
               </Form>
-              <Button>Submit</Button>
+              <Button onClick={this.handleSubmit}>Submit</Button>
             </Card.Body>
           </Card>
         </Container>
@@ -37,4 +79,4 @@ class NewQuestion extends Component {
   }
 }
 
-export default NewQuestion;
+export default connect()(NewQuestion);
