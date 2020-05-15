@@ -19,6 +19,7 @@ class Question extends Component {
   render() {
     const {question} = this.props;
     const {option} = this.state;
+
     return (
         <Card>
           <Card.Header>{question.author} asks...</Card.Header>
@@ -28,13 +29,13 @@ class Question extends Component {
                   onClick={this._onOptionChange.bind(this, "optionOne")}
                   active={option === "optionOne"}
                   variant={option === "optionOne" ? "success":"secondary"}
-              >{question.optionOne}</Button>
+              >{question.optionOne}</Button>Votes:{question.oneVotes}
               <br/>
               <Button
                   onClick={this._onOptionChange.bind(this, "optionTwo")}
                   active={option === "optionTwo"}
                   variant={option === "optionTwo" ? "success":"secondary"}
-              >{question.optionTwo}</Button>
+              >{question.optionTwo}</Button>Votes:{question.twoVotes}
           </Card.Text>
 
           <Card.Footer>
@@ -58,7 +59,9 @@ function mapStateToProps({authedUser, questions}, {id}) {
           author: question.author,
           timestamp: question.timestamp,
           optionOne: question.optionOne.text,
-          optionTwo: question.optionTwo.text
+          oneVotes: question.optionOne.votes.length,
+          optionTwo: question.optionTwo.text,
+          twoVotes: question.optionTwo.votes.length
         }
         : "NO QUESTION"
   }
