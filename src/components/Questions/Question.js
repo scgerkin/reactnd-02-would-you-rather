@@ -1,26 +1,42 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
 
 class Question extends Component {
   render() {
     const {question} = this.props;
     return (
         <div>
-          {question}
+          {question.qid}
+          <br/>
+          {question.author}
+          <br/>
+          {question.timestamp}
+          <br/>
+          {question.optionOne}
+          <br/>
+          {question.optionTwo}
         </div>
     );
   }
 }
 
-function mapStateToProps({authedUser, users, questions}, props) {
-  //const {id} = props.match.params;
-  const id = "8xf0y6ziyjabvozdd253nd";
+function mapStateToProps({authedUser, questions}, {id}) {
   const question = questions[id];
 
   return {
     authedUser,
-    question: question ? "QUESTION" : "NO QUESTION"
+    qid: id,
+    question: question
+        ? {
+          qid: question.id,
+          author: question.author,
+          timestamp: question.timestamp,
+          optionOne: question.optionOne.text,
+          optionTwo: question.optionTwo.text
+        }
+        : "NO QUESTION"
   }
 }
 
-export default connect(mapStateToProps)(Question);
+export default withRouter(connect(mapStateToProps)(Question));

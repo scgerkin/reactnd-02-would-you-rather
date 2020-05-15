@@ -19,7 +19,7 @@ class QuestionPage extends React.Component {
   }
 }
 
-function mapStateToProps({questions}) {
+function mapStateToProps({questions}, props) {
   return {
     questionIds: Object.keys(questions)
         .sort((a, b) => questions[b].timestamp - questions[a].timestamp)

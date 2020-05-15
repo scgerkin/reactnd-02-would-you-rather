@@ -110,7 +110,7 @@ let questions = {
     },
     optionTwo: {
       votes: ['tylermcginnis'],
-      text: 'write Swift'
+      text: 'set your face on fire'
     }
   },
 }
