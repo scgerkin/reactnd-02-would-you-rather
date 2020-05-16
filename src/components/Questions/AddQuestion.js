@@ -6,27 +6,27 @@ import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 import {handleAddQuestion} from "../../actions/questions";
 
-const QUESTION_ONE = "QUESTION_ONE";
-const QUESTION_TWO = "QUESTION_TWO";
+const OPTION_ONE = "OPTION_ONE";
+const OPTION_TWO = "OPTION_TWO";
 
-//consider changing column display? not sure about question flow
-// should probably select a question -> go to question -> then edit from there
-class NewQuestion extends Component {
+// TODO validation
+class AddQuestion extends Component {
   state = {
     optionOne: "",
-    optionTwo: ""
+    optionTwo: "",
+    toHome: false
   }
 
   handleChange = (event) => {
     const value = event.target.value;
     switch (event.target.id) {
-      case QUESTION_ONE:
+      case OPTION_ONE:
         this.setState((currentState) => ({
           optionOne: value,
           optionTwo: currentState.optionTwo
         }));
         break;
-      case QUESTION_TWO:
+      case OPTION_TWO:
         this.setState((currentState) => ({
           optionOne: currentState.optionOne,
           optionTwo: value
@@ -37,7 +37,7 @@ class NewQuestion extends Component {
     }
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = () => {
     const {dispatch} = this.props;
     dispatch(handleAddQuestion(this.state.optionOne, this.state.optionTwo));
   }
@@ -52,9 +52,9 @@ class NewQuestion extends Component {
               <Form>
                 <Card.Text as={"div"}>
                   <Form.Control
-                      id={QUESTION_ONE}
+                      id={OPTION_ONE}
                       type={"text"}
-                      placeholder={"Question one..."}
+                      placeholder={"Option one..."}
                       onChange={this.handleChange}
                   />
                 </Card.Text>
@@ -64,9 +64,9 @@ class NewQuestion extends Component {
                 <Card.Text as={"div"}>
 
                   <Form.Control
-                      id={QUESTION_TWO}
+                      id={OPTION_TWO}
                       type={"text"}
-                      placeholder={"Question two..."}
+                      placeholder={"Option two..."}
                       onChange={this.handleChange}
                   />
                 </Card.Text>
@@ -79,4 +79,4 @@ class NewQuestion extends Component {
   }
 }
 
-export default connect()(NewQuestion);
+export default connect()(AddQuestion);

@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import Question from "./Question";
 import {ANSWERED, UNANSWERED, USER_QUESTIONS} from "../Home/Home";
 
-class QuestionPage extends React.Component {
+class QuestionList extends React.Component {
 
   render() {
     return (
@@ -45,4 +45,4 @@ function filterQuestionsBySelection(questions, selection, authedUser) {
   }
 }
 
-export default connect(mapStateToProps)(QuestionPage);
+export default connect(mapStateToProps)(QuestionList);

@@ -6,7 +6,7 @@ import NavContainer from "./Navigation/NavContainer";
 import Home from "./Home/Home";
 import {Leaderboard} from "./Leaderboard/Leaderboard";
 import {Auth} from "./Auth/Auth";
-import NewQuestion from "./Questions/NewQuestion";
+import NewQuestion from "./Questions/AddQuestion";
 import {handleInitialData} from "../actions/shared";
 
 class App extends Component {
