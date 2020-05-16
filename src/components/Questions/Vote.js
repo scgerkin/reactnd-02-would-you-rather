@@ -11,6 +11,9 @@ import FigureImage from "react-bootstrap/FigureImage";
 const OPTION_ONE = "optionOne"
 const OPTION_TWO = "optionTwo"
 
+// TODO Style question area a little better, maybe options should be smaller?
+// TODO On vote, navigate? This might be handled with state change though
+//  once results card is implemented
 class Vote extends Component {
   state = {
     option: ""
@@ -19,6 +22,10 @@ class Vote extends Component {
   onCastVote() {
     const {dispatch, authedUser, id} = this.props;
     const {option} = this.state;
+
+    if (!option || option === "") {
+      return;
+    }
 
     dispatch(handleVote(authedUser, id, option));
   }
@@ -70,6 +77,8 @@ class Vote extends Component {
                   <Row>
                     <Button
                         onClick={() => this.onCastVote()}
+                        disabled={this.state.option === ""}
+                        className={"btn-secondary"}
                     >
                       Cast your Vote!
                     </Button>
