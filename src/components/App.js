@@ -7,7 +7,6 @@ import Home from "./Home/Home";
 import {Leaderboard} from "./Leaderboard/Leaderboard";
 import {Auth} from "./Auth/Auth";
 import NewQuestion from "./Questions/NewQuestion";
-import QuestionPage from "./Questions/QuestionPage";
 import {handleInitialData} from "../actions/shared";
 
 class App extends Component {
@@ -22,7 +21,6 @@ class App extends Component {
             <NavContainer/>
             <div>
               <Route exact path={"/"} component={Home}/>
-              <Route exact path={"/questions"} component={QuestionPage}/>
               <Route exact path={"/add"} component={NewQuestion}/>
               <Route path={"/leaderboard"} component={Leaderboard}/>
               <Route path={"/auth"} component={Auth}/>

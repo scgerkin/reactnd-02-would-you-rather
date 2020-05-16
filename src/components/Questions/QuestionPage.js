@@ -41,7 +41,7 @@ function filterQuestionsBySelection(questions, selection, authedUser) {
       )
     default:
       console.warn(`Error in rendering QuestionPage, unknown selection type: '${selection}'`);
-      return questions;
+      return [];
   }
 }
 
