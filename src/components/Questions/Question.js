@@ -4,8 +4,15 @@ import {withRouter} from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import {handleVote} from "../../actions/questions";
+import Container from "react-bootstrap/Container";
+import Vote from "./Vote";
 
 // TODO get user.name from state instead of question.author
+// TODO Get question ID from path params
+// nts
+//  I think this should act as a dispatch component to either Vote or Result
+//  It can determine which one should be displayed and give the appropriate
+//  information based on the component to display
 class Question extends Component {
   state = {
     option: ""
@@ -25,6 +32,14 @@ class Question extends Component {
     const {option} = this.state;
 
     return (
+        <Container>
+          <Vote
+              id={this.props.id}
+              author={question.author} // todo, this needs to be retrieved from users state
+              authorAvatar={"http://placekitten.com/150/150"} //todo
+          />
+
+
         <Card>
           <Card.Header>{question.author} asks...</Card.Header>
           <Card.Title>Would you rather...</Card.Title>
@@ -42,10 +57,12 @@ class Question extends Component {
               >{question.optionTwo}</Button>Votes:{question.twoVotes}
           </Card.Text>
         </Card>
+        </Container>
     );
   }
 }
 
+//fixme code duplication
 function mapStateToProps({authedUser, questions}, {id}) {
   const question = questions[id];
 
