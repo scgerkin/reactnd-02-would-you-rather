@@ -11,6 +11,7 @@ import {handleInitialData} from "../actions/shared";
 import Question from "./Questions/Question";
 
 // TODO Loading bar/spinner
+// TODO Decide on container sizes ...?based on media
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());

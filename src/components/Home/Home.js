@@ -8,6 +8,7 @@ export const UNANSWERED = "UNANSWERED"
 export const ANSWERED = "ANSWERED"
 export const USER_QUESTIONS = "USER_QUESTIONS"
 
+// TODO Fix nav overshooting to the left of the question list container
 // consider switching to Tabs
 //  https://react-bootstrap.github.io/components/tabs/#tabs-custom-layout
 //  This would be a somewhat considerable refactor allowing each tab
@@ -30,7 +31,6 @@ class Home extends React.Component {
         <Container className={"mc-auto"}>
           <Nav
               className={"justify-content-center"}
-
               variant={"tabs"}
               defaultActiveKey={this.state.selection}
           >

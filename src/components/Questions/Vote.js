@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import {handleVote} from "../../actions/questions";
+import FigureImage from "react-bootstrap/FigureImage";
 
 const OPTION_ONE = "optionOne"
 const OPTION_TWO = "optionTwo"
@@ -32,7 +33,12 @@ class Vote extends Component {
           <Card.Body>
             <Row>
               <Col>
-                {authorAvatar /*todo*/}
+                <FigureImage
+                    src={authorAvatar}
+                    width={150}
+                    height={150}
+                    roundedCircle
+                />
               </Col>
               <Col>
                 <Row>
