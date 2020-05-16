@@ -13,6 +13,10 @@ class Home extends React.Component {
     selection: UNANSWERED
   }
 
+  handleToggleSelection(selection) {
+    this.setState(()=> ({selection}));
+  }
+
   render() {
     return (
         <Container>
@@ -22,17 +26,26 @@ class Home extends React.Component {
               defaultActiveKey={this.state.selection}
           >
             <Nav.Item>
-              <Nav.Link eventKey={UNANSWERED}>Unanswered</Nav.Link>
+              <Nav.Link
+                  eventKey={UNANSWERED}
+                  onClick={() => this.handleToggleSelection(UNANSWERED)}
+              >Unanswered</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey={ANSWERED}>Answered</Nav.Link>
+              <Nav.Link
+                  eventKey={ANSWERED}
+                  onClick={() => this.handleToggleSelection(ANSWERED)}
+              >Answered</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link eventKey={USER_QUESTIONS}>Your Questions</Nav.Link>
+              <Nav.Link
+                  eventKey={USER_QUESTIONS}
+                  onClick={() => this.handleToggleSelection(USER_QUESTIONS)}
+              >Your Questions</Nav.Link>
             </Nav.Item>
           </Nav>
           <QuestionPage
-              selection={UNANSWERED}
+              selection={this.state.selection}
           />
         </Container>
     );

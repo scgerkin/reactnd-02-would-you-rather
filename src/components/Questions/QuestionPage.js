@@ -36,7 +36,9 @@ function filterQuestionsBySelection(questions, selection, authedUser) {
           || questions[id].optionTwo.votes.includes(authedUser)
       )
     case USER_QUESTIONS:
-      return Object.keys(questions).filter(id => id === authedUser.id);
+      return Object.keys(questions).filter(id =>
+          questions[id].author === authedUser
+      )
     default:
       console.warn(`Error in rendering QuestionPage, unknown selection type: '${selection}'`);
       return questions;
