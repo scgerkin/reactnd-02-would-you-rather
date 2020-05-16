@@ -40,6 +40,7 @@ class AddQuestion extends Component {
   handleSubmit = () => {
     const {dispatch} = this.props;
     dispatch(handleAddQuestion(this.state.optionOne, this.state.optionTwo));
+    this.props.history.push("/")
   }
 
   render() {
