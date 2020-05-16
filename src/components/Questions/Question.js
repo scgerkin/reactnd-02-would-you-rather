@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import {handleVote} from "../../actions/questions";
 
-//todo Styling is hacky as a button, might need custom css
+// TODO get user.name from state instead of question.author
 class Question extends Component {
   state = {
     option: ""

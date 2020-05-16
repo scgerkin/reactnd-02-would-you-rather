@@ -9,6 +9,7 @@ import {Auth} from "./Auth/Auth";
 import NewQuestion from "./Questions/AddQuestion";
 import {handleInitialData} from "../actions/shared";
 
+// TODO Loading bar/spinner
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData());

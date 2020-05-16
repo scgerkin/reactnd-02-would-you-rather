@@ -60,7 +60,7 @@ class AddQuestion extends Component {
                   />
                 </Card.Text>
                 <Card.Text as={"div"}>
-                  OR
+                  <hr/>
                 </Card.Text>
                 <Card.Text as={"div"}>
 
