@@ -41,11 +41,6 @@ class Question extends Component {
                   variant={option === "optionTwo" ? "success":"secondary"}
               >{question.optionTwo}</Button>Votes:{question.twoVotes}
           </Card.Text>
-
-          <Card.Footer>
-            <Button>Submit</Button>
-          </Card.Footer>
-
         </Card>
     );
   }

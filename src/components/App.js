@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import {connect} from "react-redux";
 import '../styles/App.css';
 import NavContainer from "./Navigation/NavContainer";
-import {Home} from "./Home/Home";
+import Home from "./Home/Home";
 import {Leaderboard} from "./Leaderboard/Leaderboard";
 import {Auth} from "./Auth/Auth";
 import NewQuestion from "./Questions/NewQuestion";
