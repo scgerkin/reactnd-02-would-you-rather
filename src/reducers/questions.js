@@ -40,9 +40,10 @@ function handleReceiveQuestions(state, action) {
  */
 function handleAddQuestion(state, action) {
   const {question} = action;
+
   return {
     ...state,
-    question
+    [question.id]: question
   }
 }
 
