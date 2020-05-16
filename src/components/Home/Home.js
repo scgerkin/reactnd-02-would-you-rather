@@ -13,11 +13,6 @@ class Home extends React.Component {
     selection: UNANSWERED
   }
 
-  containerStyle = {
-    borderLeft: "1px solid grey",
-    borderRight: "1px solid grey"
-  }
-
   render() {
     return (
         <Container>
@@ -25,7 +20,6 @@ class Home extends React.Component {
               className={"justify-content-center"}
               variant={"tabs"}
               defaultActiveKey={this.state.selection}
-              style={this.containerStyle}
           >
             <Nav.Item>
               <Nav.Link eventKey={UNANSWERED}>Unanswered</Nav.Link>
@@ -38,7 +32,6 @@ class Home extends React.Component {
             </Nav.Item>
           </Nav>
           <QuestionPage
-              style={this.containerStyle}
               selection={UNANSWERED}
           />
         </Container>
