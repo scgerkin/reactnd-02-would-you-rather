@@ -1,8 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import QuestionPage from "../Questions/QuestionList";
+import QuestionList from "../Questions/QuestionList";
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
 
 export const UNANSWERED = "UNANSWERED"
 export const ANSWERED = "ANSWERED"
@@ -13,39 +14,28 @@ class Home extends React.Component {
     selection: UNANSWERED
   }
 
-  handleToggleSelection(selection) {
-    this.setState(()=> ({selection}));
-  }
-
   render() {
     return (
         <Container className={"mc-auto"}>
-          <Nav
-              className={"justify-content-center"}
-
-              variant={"tabs"}
-              defaultActiveKey={this.state.selection}
+          <Tabs
+              id={"question-tabs"}
+              activeKey={this.state.selection}
+              onSelect={(selection) => this.setState(() => ({selection}))}
           >
-            <Nav.Item>
-              <Nav.Link
-                  eventKey={UNANSWERED}
-                  onClick={() => this.handleToggleSelection(UNANSWERED)}
-              >Unanswered</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                  eventKey={ANSWERED}
-                  onClick={() => this.handleToggleSelection(ANSWERED)}
-              >Answered</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                  eventKey={USER_QUESTIONS}
-                  onClick={() => this.handleToggleSelection(USER_QUESTIONS)}
-              >Your Questions</Nav.Link>
-            </Nav.Item>
-          </Nav>
-          <QuestionPage
+            <Tab
+                eventKey={UNANSWERED}
+                title={"Unanswered"}
+            />
+            <Tab
+                eventKey={ANSWERED}
+                title={"Answered"}
+            />
+            <Tab
+                eventKey={USER_QUESTIONS}
+                title={"Your Questions"}
+            />
+          </Tabs>
+          <QuestionList
               selection={this.state.selection}
           />
         </Container>
