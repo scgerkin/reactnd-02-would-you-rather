@@ -19,9 +19,10 @@ class Home extends React.Component {
 
   render() {
     return (
-        <Container>
+        <Container className={"mc-auto"}>
           <Nav
               className={"justify-content-center"}
+
               variant={"tabs"}
               defaultActiveKey={this.state.selection}
           >
