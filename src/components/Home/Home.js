@@ -1,41 +1,59 @@
 import React from "react";
 import {connect} from "react-redux";
 import Container from "react-bootstrap/Container";
-import QuestionList from "../Questions/QuestionList";
-import Tabs from "react-bootstrap/Tabs";
-import Tab from "react-bootstrap/Tab";
+import Nav from "react-bootstrap/Nav";
+import QuestionPage from "../Questions/QuestionList";
 
 export const UNANSWERED = "UNANSWERED"
 export const ANSWERED = "ANSWERED"
 export const USER_QUESTIONS = "USER_QUESTIONS"
 
+// consider switching to Tabs
+//  https://react-bootstrap.github.io/components/tabs/#tabs-custom-layout
+//  This would be a somewhat considerable refactor allowing each tab
+//  to receive a question page with filtered items
+//  <Tab ...><QuestionList questions={filteredQuestionIds}></Tab>
+//  To fix the alignment, will need to use a custom tab layout with
+//  a Nav element as currently implemented and then
+//  <Tab.Content><QuestionPage..></Tab.Content>
 class Home extends React.Component {
   state = {
     selection: UNANSWERED
   }
 
+  handleToggleSelection(selection) {
+    this.setState(()=> ({selection}));
+  }
+
   render() {
     return (
         <Container className={"mc-auto"}>
-          <Tabs
-              id={"question-tabs"}
-              activeKey={this.state.selection}
-              onSelect={(selection) => this.setState(() => ({selection}))}
+          <Nav
+              className={"justify-content-center"}
+
+              variant={"tabs"}
+              defaultActiveKey={this.state.selection}
           >
-            <Tab
-                eventKey={UNANSWERED}
-                title={"Unanswered"}
-            />
-            <Tab
-                eventKey={ANSWERED}
-                title={"Answered"}
-            />
-            <Tab
-                eventKey={USER_QUESTIONS}
-                title={"Your Questions"}
-            />
-          </Tabs>
-          <QuestionList
+            <Nav.Item>
+              <Nav.Link
+                  eventKey={UNANSWERED}
+                  onClick={() => this.handleToggleSelection(UNANSWERED)}
+              >Unanswered</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                  eventKey={ANSWERED}
+                  onClick={() => this.handleToggleSelection(ANSWERED)}
+              >Answered</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link
+                  eventKey={USER_QUESTIONS}
+                  onClick={() => this.handleToggleSelection(USER_QUESTIONS)}
+              >Your Questions</Nav.Link>
+            </Nav.Item>
+          </Nav>
+          <QuestionPage
               selection={this.state.selection}
           />
         </Container>
