@@ -13,17 +13,17 @@ import QuestionResults from "./QuestionResults";
 // TODO Get question ID from path params
 class Question extends Component {
   render() {
-    const {creator, question} = this.props;
-
+    const {hasVoted, creator, question} = this.props;
 
     //fixme this is a temp hack,
     // might be resolved when loading reducer implemented?
     // still need to handle invalid ID though
     if (!!question) {
+      const header = hasVoted ? `Asked by ${creator.name}` : `${creator.name} asks:`
       return (
           <Container>
             <Card>
-              <Card.Header className={"text-left"}>{creator.name} asks:</Card.Header>
+              <Card.Header className={"text-left"}>{header}</Card.Header>
               <Card.Body>
                 <Row>
                   <Col>
@@ -35,39 +35,23 @@ class Question extends Component {
                     />
                   </Col>
                   <Col>
-                    <Vote
-                        qid={question.id}
-                        optionOne={question.optionOne.text}
-                        optionTwo={question.optionTwo.text}
-                    />
+                    {hasVoted && (
+                        <QuestionResults
+                            optionOne={question.optionOne}
+                            optionTwo={question.optionTwo}
+                        />
+                    )}
+                    {!hasVoted && (
+                        <Vote
+                            qid={question.id}
+                            optionOne={question.optionOne.text}
+                            optionTwo={question.optionTwo.text}
+                        />
+                    )}
                   </Col>
                 </Row>
               </Card.Body>
             </Card>
-
-            {/*TODO switch on result vs vote*/}
-            <Card>
-              <Card.Header className={"text-left"}>{creator.name} asks:</Card.Header>
-              <Card.Body>
-                <Row>
-                  <Col>
-                    <FigureImage
-                        src={creator.avatarURL}
-                        width={150}
-                        height={150}
-                        roundedCircle
-                    />
-                  </Col>
-                  <Col>
-                    <QuestionResults
-                        optionOne={question.optionOne}
-                        optionTwo={question.optionTwo}
-                    />
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
-
           </Container>
       );
     }
@@ -81,8 +65,16 @@ function mapStateToProps({users, authedUser, questions}, {id}) {
   //todo handle invalid id
   const question = questions[id];
 
+  let hasVoted = false;
+  if (!!question) {
+    hasVoted =
+        question.optionOne.votes.includes(authedUser)
+        || question.optionTwo.votes.includes(authedUser)
+  }
+
   return {
     authedUser,   // nts may not need this here
+    hasVoted,
     creator: question ? users[question.author]: null,
     question: question ? question : null
   }
