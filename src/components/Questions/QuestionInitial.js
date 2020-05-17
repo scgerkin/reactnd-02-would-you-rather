@@ -12,7 +12,7 @@ class QuestionInitial extends React.Component {
     console.log("ID", id)
     console.log(this.props)
     console.log("History", this.props.history)
-    //this.props.history.push(`/questions/${id}`)
+    this.props.history.push(`/questions/${id}`)
   }
 
   render() {

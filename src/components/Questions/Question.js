@@ -63,11 +63,18 @@ class Question extends Component {
   }
 }
 
-//fixme
 function mapStateToProps({users, authedUser, questions}, props) {
+  //fixme this is a little hacky but needed based on the way this component is
+  // constructed... It either has to be inside a list where there won't be any
+  // path params so it needs to get the id from the props.id BUT if it's alone
+  // and not in a list, it needs to get the id from the path params.
+  // The resolution may be to extract QuestionInitial out and use that for the
+  // list, then that will create the Question component... not sure on this.
   let {id} = props.match.params
+  let isListView = false
   if (!id) {
     id = props.id
+    isListView = true
   }
 
   //todo handle invalid id
@@ -83,7 +90,7 @@ function mapStateToProps({users, authedUser, questions}, props) {
   return {
     hasVoted,
     id,
-    isListView: !!id,
+    isListView,
     creator: question ? users[question.author]: null,
     question: question ? question : null
   }
