@@ -2,6 +2,7 @@ import React from 'react';
 import Row from "react-bootstrap/Row";
 import QuestionResultItem from "./QuestionResultItem";
 
+//todo mark which option user chose
 function QuestionResults(props) {
 
   const {optionOne, optionTwo} = props
