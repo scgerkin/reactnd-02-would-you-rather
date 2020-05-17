@@ -12,20 +12,22 @@ import FigureImage from "react-bootstrap/FigureImage";
 // TODO Get question ID from path params
 class Question extends Component {
   render() {
-    const {question} = this.props;
+    const {creator, question} = this.props;
 
 
-
-    if (!!question) {//fixme this is a temp hack
+    //fixme this is a temp hack,
+    // might be resolved when loading reducer implemented?
+    // still need to handle invalid ID though
+    if (!!question) {
       return (
           <Container>
             <Card>
-              <Card.Header className={"text-left"}>{question.author} asks:</Card.Header>
+              <Card.Header className={"text-left"}>{creator.name} asks:</Card.Header>
               <Card.Body>
                 <Row>
                   <Col>
                     <FigureImage
-                        src={"http://placekitten.com/150/150"}
+                        src={creator.avatarURL}
                         width={150}
                         height={150}
                         roundedCircle
@@ -50,14 +52,15 @@ class Question extends Component {
   }
 }
 
-function mapStateToProps({authedUser, questions}, {id}) {
+function mapStateToProps({users, authedUser, questions}, {id}) {
   //todo get id from params
   //const {id} = props.match.params;
+  //todo handle invalid id
   const question = questions[id];
 
-  //todo handle invalid id
   return {
-    authedUser,
+    authedUser,   // nts may not need this here
+    creator: question ? users[question.author]: null,
     question: question ? question : null
   }
 }
