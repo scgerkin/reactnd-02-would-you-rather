@@ -11,7 +11,7 @@ const OPTION_TWO = "optionTwo"
 // TODO Style question area a little better, maybe options should be smaller?
 // TODO On vote, navigate? This might be handled with state change though
 //  once results card is implemented
-class Vote extends Component {
+class QuestionVote extends Component {
   state = {
     option: ""
   }
@@ -78,4 +78,4 @@ function mapStateToProps({dispatch, authedUser}, {qid}) {
   }
 }
 
-export default connect(mapStateToProps)(Vote);
+export default connect(mapStateToProps)(QuestionVote);

@@ -2,18 +2,19 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import Vote from "./Vote";
+import Vote from "./QuestionVote";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import FigureImage from "react-bootstrap/FigureImage";
 import QuestionResults from "./QuestionResults";
+import QuestionInitial from "./QuestionInitial";
 
 // TODO get user.name from state instead of question.author
 // TODO Get question ID from path params
 class Question extends Component {
   render() {
-    const {hasVoted, creator, question} = this.props;
+    const {hasVoted, id, isListView, creator, question} = this.props;
 
     //fixme this is a temp hack,
     // might be resolved when loading reducer implemented?
@@ -35,13 +36,16 @@ class Question extends Component {
                     />
                   </Col>
                   <Col>
-                    {hasVoted && (
+                    {isListView && (
+                        <QuestionInitial displayText={"asdofijasodfi"} id={id}/>
+                    )}
+                    {!isListView && hasVoted && (
                         <QuestionResults
                             optionOne={question.optionOne}
                             optionTwo={question.optionTwo}
                         />
                     )}
-                    {!hasVoted && (
+                    {!isListView && !hasVoted && (
                         <Vote
                             qid={question.id}
                             optionOne={question.optionOne.text}
@@ -72,9 +76,13 @@ function mapStateToProps({users, authedUser, questions}, {id}) {
         || question.optionTwo.votes.includes(authedUser)
   }
 
+
+
   return {
     authedUser,   // nts may not need this here
     hasVoted,
+    id,
+    isListView: true,
     creator: question ? users[question.author]: null,
     question: question ? question : null
   }
