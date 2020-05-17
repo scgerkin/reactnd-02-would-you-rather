@@ -1,10 +1,9 @@
 import {receiveUsers} from "./users";
 import {receiveQuestions} from "./questions";
-import {setAuthedUser} from "./authedUser.js";
-
-// todo get from auth
+import {setAuthedUser} from "./authedUser.js"
 import {getInitialData} from "../utils/api";
 
+//todo set to null after development
 const AUTHED_ID = "sarahedo"
 
 export function handleInitialData() {

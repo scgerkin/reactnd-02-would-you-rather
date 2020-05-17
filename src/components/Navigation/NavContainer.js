@@ -5,12 +5,14 @@ import {LinkContainer} from 'react-router-bootstrap';
 import {connect} from "react-redux";
 import FigureImage from "react-bootstrap/FigureImage";
 import Button from "react-bootstrap/Button";
+import {logout} from "../../actions/authedUser";
 
 
 class NavContainer extends React.Component {
 
-  onLogout() {
-    console.log("logged out");
+  onLogout= () => {
+    const {dispatch} = this.props
+    dispatch(logout())
   }
 
   render() {

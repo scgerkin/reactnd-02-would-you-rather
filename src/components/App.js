@@ -5,7 +5,7 @@ import '../styles/App.css';
 import NavContainer from "./Navigation/NavContainer";
 import Home from "./Home/Home";
 import Leaderboard from "./Leaderboard/Leaderboard";
-import {Auth} from "./Auth/Auth";
+import Auth from "./Auth/Auth";
 import NewQuestion from "./Questions/AddQuestion";
 import {handleInitialData} from "../actions/shared";
 import Question from "./Questions/Question";
