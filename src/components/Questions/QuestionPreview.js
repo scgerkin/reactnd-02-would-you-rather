@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 
-class QuestionInitial extends React.Component {
+class QuestionPreview extends React.Component {
 
   handleOnClick = () => {
     const {id} = this.props
@@ -20,7 +20,7 @@ class QuestionInitial extends React.Component {
     return (
         <Container>
           <Row>
-            <h4>Would you rather...</h4>
+            <h4>Would you rather</h4>
           </Row>
           <Row as={"p"}>
             {displayText}
@@ -35,4 +35,4 @@ class QuestionInitial extends React.Component {
   }
 }
 
-export default withRouter(connect()(QuestionInitial));
+export default withRouter(connect()(QuestionPreview));

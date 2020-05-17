@@ -8,13 +8,21 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import FigureImage from "react-bootstrap/FigureImage";
 import QuestionResults from "./QuestionResults";
-import QuestionInitial from "./QuestionInitial";
+import QuestionInitial from "./QuestionPreview";
 
-// TODO get user.name from state instead of question.author
-// TODO Get question ID from path params
 class Question extends Component {
+
+  formatQuestionPreview(question) {
+    return "..."
+      + ((question.length > 20)
+        ? question.substring(0, 20)
+        : question)
+      + "..."
+  }
+
   render() {
     const {hasVoted, id, isListView, creator, question} = this.props;
+    const questionPreview = this.formatQuestionPreview(question.optionOne.text)
 
     //fixme this is a temp hack,
     // might be resolved when loading reducer implemented?
@@ -37,7 +45,7 @@ class Question extends Component {
                   </Col>
                   <Col>
                     {isListView && (
-                        <QuestionInitial displayText={"asdofijasodfi"} id={id}/>
+                        <QuestionInitial displayText={questionPreview} id={id}/>
                     )}
                     {!isListView && hasVoted && (
                         <QuestionResults
