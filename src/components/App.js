@@ -9,6 +9,8 @@ import Auth from "./Auth/Auth";
 import NewQuestion from "./Questions/AddQuestion";
 import {handleInitialData} from "../actions/shared";
 import Question from "./Questions/Question";
+import Button from "react-bootstrap/Button";
+import {setAuthedUser} from "../actions/authedUser";
 
 // TODO Loading bar/spinner
 // TODO Decide on container sizes ...?based on media
@@ -17,10 +19,19 @@ class App extends Component {
     this.props.dispatch(handleInitialData());
   }
 
+  //todo remove after dev
+  toggleAuth = () => {
+    const {dispatch} = this.props
+    dispatch(setAuthedUser("sarahedo"))
+  }
+
   render() {
     return (
         <Router>
           <div className="App">
+            <Button onClick={this.toggleAuth}> {/*todo remove*/}
+              login
+            </Button>
             <NavContainer/>
             <div>
               <Route exact path={"/"} component={Home}/>
@@ -30,7 +41,9 @@ class App extends Component {
               <Route path={"/auth"} component={Auth}/>
             </div>
           </div>
+
         </Router>
+
     );
   }
 }
