@@ -1,6 +1,7 @@
 import React from "react";
+import {connect} from "react-redux";
 
-export class Leaderboard extends React.Component {
+class Leaderboard extends React.Component {
   render() {
     return (
         <div>
@@ -9,3 +10,9 @@ export class Leaderboard extends React.Component {
     )
   }
 }
+
+function mapStateToProps() {
+
+}
+
+export default connect(mapStateToProps())(Leaderboard)
