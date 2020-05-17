@@ -3,47 +3,62 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Vote from "./Vote";
+import Card from "react-bootstrap/Card";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import FigureImage from "react-bootstrap/FigureImage";
 
 // TODO get user.name from state instead of question.author
 // TODO Get question ID from path params
-// nts
-//  I think this should act as a dispatch component to either Vote or Result
-//  It can determine which one should be displayed and give the appropriate
-//  information based on the component to display
 class Question extends Component {
   render() {
     const {question} = this.props;
 
-    return (
-        <Container>
-          <Vote
-              id={this.props.id}
-              author={question.author} // todo, this needs to be retrieved from users state
-              authorAvatar={"http://placekitten.com/150/150"} //todo
-          />
-        </Container>
-    );
+
+
+    if (!!question) {//fixme this is a temp hack
+      return (
+          <Container>
+            <Card>
+              <Card.Header className={"text-left"}>{question.author} asks:</Card.Header>
+              <Card.Body>
+                <Row>
+                  <Col>
+                    <FigureImage
+                        src={"http://placekitten.com/150/150"}
+                        width={150}
+                        height={150}
+                        roundedCircle
+                    />
+                  </Col>
+                  <Col>
+                    <Vote
+                        qid={question.id}
+                        optionOne={question.optionOne.text}
+                        optionTwo={question.optionTwo.text}
+                    />
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
+
+
+          </Container>
+      );
+    }
+    return (<div/>)
   }
 }
 
-//fixme code duplication
 function mapStateToProps({authedUser, questions}, {id}) {
+  //todo get id from params
+  //const {id} = props.match.params;
   const question = questions[id];
 
+  //todo handle invalid id
   return {
     authedUser,
-    qid: id,
-    question: question
-        ? {
-          qid: question.id,
-          author: question.author,
-          timestamp: question.timestamp,
-          optionOne: question.optionOne.text,
-          oneVotes: question.optionOne.votes.length,
-          optionTwo: question.optionTwo.text,
-          twoVotes: question.optionTwo.votes.length
-        }
-        : "NO QUESTION"
+    question: question ? question : null
   }
 }
 
