@@ -1,26 +1,37 @@
 import React from 'react';
+import {connect} from "react-redux";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 
-function QuestionInitial(props) {
-  const {displayText, id} = props
+class QuestionInitial extends React.Component {
 
-  return (
-      <Container>
-        <Row>
-          <h4>Would you rather...</h4>
-        </Row>
-        <Row as={"p"}>
-          {displayText}
-        </Row>
-        <Row>
-          <Button
-              onClick={()=> (props.history.push(`/questions/${id}`))}
-          >View Poll</Button>
-        </Row>
-      </Container>
-  );
+  handleOnClick = () => {
+    const {id} = this.props
+    console.log("ID", id)
+    console.log(this.props)
+    console.log("History", this.props.history)
+    //this.props.history.push(`/questions/${id}`)
+  }
+
+  render() {
+    const {displayText} = this.props
+    return (
+        <Container>
+          <Row>
+            <h4>Would you rather...</h4>
+          </Row>
+          <Row as={"p"}>
+            {displayText}
+          </Row>
+          <Row>
+            <Button
+                onClick={this.handleOnClick}
+            >View Poll</Button>
+          </Row>
+        </Container>
+    );
+  }
 }
 
-export default QuestionInitial;
+export default connect()(QuestionInitial);
