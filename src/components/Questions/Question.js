@@ -7,6 +7,7 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import FigureImage from "react-bootstrap/FigureImage";
+import QuestionResults from "./QuestionResults";
 
 // TODO get user.name from state instead of question.author
 // TODO Get question ID from path params
@@ -44,6 +45,28 @@ class Question extends Component {
               </Card.Body>
             </Card>
 
+            {/*TODO switch on result vs vote*/}
+            <Card>
+              <Card.Header className={"text-left"}>{creator.name} asks:</Card.Header>
+              <Card.Body>
+                <Row>
+                  <Col>
+                    <FigureImage
+                        src={creator.avatarURL}
+                        width={150}
+                        height={150}
+                        roundedCircle
+                    />
+                  </Col>
+                  <Col>
+                    <QuestionResults
+                        optionOne={question.optionOne}
+                        optionTwo={question.optionTwo}
+                    />
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
 
           </Container>
       );
