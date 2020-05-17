@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
@@ -34,4 +35,4 @@ class QuestionInitial extends React.Component {
   }
 }
 
-export default connect()(QuestionInitial);
+export default withRouter(connect()(QuestionInitial));

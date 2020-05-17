@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import QuestionPage from "../Questions/QuestionList";
+import QuestionList from "../Questions/QuestionList";
 
 export const UNANSWERED = "UNANSWERED"
 export const ANSWERED = "ANSWERED"
@@ -53,7 +53,7 @@ class Home extends React.Component {
               >Your Questions</Nav.Link>
             </Nav.Item>
           </Nav>
-          <QuestionPage
+          <QuestionList
               selection={this.state.selection}
           />
         </Container>

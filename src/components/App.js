@@ -8,6 +8,7 @@ import {Leaderboard} from "./Leaderboard/Leaderboard";
 import {Auth} from "./Auth/Auth";
 import NewQuestion from "./Questions/AddQuestion";
 import {handleInitialData} from "../actions/shared";
+import Question from "./Questions/Question";
 
 // TODO Loading bar/spinner
 // TODO Decide on container sizes ...?based on media
@@ -25,6 +26,7 @@ class App extends Component {
               <Route exact path={"/"} component={Home}/>
               <Route exact path={"/add"} component={NewQuestion}/>
               <Route path={"/leaderboard"} component={Leaderboard}/>
+              <Route path={"/questions/:id"} component={Question}/>
               <Route path={"/auth"} component={Auth}/>
             </div>
           </div>

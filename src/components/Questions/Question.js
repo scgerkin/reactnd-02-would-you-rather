@@ -63,9 +63,13 @@ class Question extends Component {
   }
 }
 
-function mapStateToProps({users, authedUser, questions}, {id}) {
-  //todo get id from params
-  //const {id} = props.match.params;
+//fixme
+function mapStateToProps({users, authedUser, questions}, props) {
+  let {id} = props.match.params
+  if (!id) {
+    id = props.id
+  }
+
   //todo handle invalid id
   const question = questions[id];
 
@@ -76,13 +80,10 @@ function mapStateToProps({users, authedUser, questions}, {id}) {
         || question.optionTwo.votes.includes(authedUser)
   }
 
-
-
   return {
-    authedUser,   // nts may not need this here
     hasVoted,
     id,
-    isListView: true,
+    isListView: !!id,
     creator: question ? users[question.author]: null,
     question: question ? question : null
   }
