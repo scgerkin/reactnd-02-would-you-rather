@@ -4,7 +4,6 @@ import Question from "./Question";
 import {ANSWERED, UNANSWERED, USER_QUESTIONS} from "../Home/Home";
 
 //todo render something if no questions present
-//todo create container for list display that navigates to a specific question
 class QuestionList extends React.Component {
 
   render() {

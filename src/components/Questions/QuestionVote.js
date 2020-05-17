@@ -9,8 +9,6 @@ const OPTION_ONE = "optionOne"
 const OPTION_TWO = "optionTwo"
 
 // TODO Style question area a little better, maybe options should be smaller?
-// TODO On vote, navigate? This might be handled with state change though
-//  once results card is implemented
 class QuestionVote extends Component {
   state = {
     option: ""

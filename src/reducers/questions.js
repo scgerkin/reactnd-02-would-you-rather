@@ -50,7 +50,6 @@ function handleAddQuestion(state, action) {
 /**
  * Handles a user selecting which option to vote for.
  * FIXME: This function is a hot mess.
- *  This implementation breaks handling votes not being saved currently.
  * @param state The current state.
  * @param action The current action.
  * @return The updated state with a vote appended to the correct choice.
