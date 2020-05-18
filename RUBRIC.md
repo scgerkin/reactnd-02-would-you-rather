@@ -37,13 +37,13 @@ Each subsection includes the criteria for that portion (parent list item) of the
 - Are the details of each poll displayed with all of the relevant information?
     1. The details of the poll are available at `questions/:question_id`.
     1. When a poll is clicked on the home page, the following is shown:
-    the text “Would You Rather”;
-    the picture of the user who posted the polling question; and
-    the two options.
+        - The text “Would You Rather”
+        - The picture of the user who posted the polling question
+        - The two options
     1. For answered polls, each of the two options contains the following:
-    the text of the option;
-    the number of people who voted for that option;
-    the percentage of people who voted for that option.
+        - The text of the option
+        - The number of people who voted for that option
+        - The percentage of people who voted for that option
     1. The option selected by the logged in user should be clearly marked.
     1. When the user is logged in, the details of the poll are shown. If the user is logged out, he/she is asked to log in before before being able to access the poll.
     1. The application asks the user to sign in and shows a 404 page if that poll does not exist. (In other words, if a user creates a poll and then the same or another user tries to access that poll by its url, the user should be asked to sign in and then be shown a 404 page. Please keep in mind that new polls will not be accessible at their url because of the way the backend is set up in this application.)
