@@ -27,8 +27,6 @@
  
 # Cleanup
 - Set initial authed user to null
-- Remove god login button on App component 
-- 
 
 # Would be nice
 - Toast on successfully adding a question
