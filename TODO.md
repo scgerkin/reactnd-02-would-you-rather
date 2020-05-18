@@ -11,10 +11,6 @@
 
 # Validation
 - Add question min length
-- Invalid Question ID on path params
-
-# Auth
-- Check if this fixes invalid state on Question
 
 # Loading Spinner
 - Should help clean up some state null checks

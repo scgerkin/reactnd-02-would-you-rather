@@ -22,12 +22,9 @@ class Question extends Component {
 
   render() {
     const {hasVoted, id, isListView, creator, question} = this.props;
-    const questionPreview = this.formatQuestionPreview(question.optionOne.text)
 
-    //fixme this is a temp hack,
-    // might be resolved when loading reducer implemented?
-    // still need to handle invalid ID though
     if (!!question) {
+      const questionPreview = this.formatQuestionPreview(question.optionOne.text)
       const header = hasVoted ? `Asked by ${creator.name}` : `${creator.name} asks:`
       return (
           <Container>
@@ -67,17 +64,26 @@ class Question extends Component {
           </Container>
       );
     }
-    return (<div/>)
+    return this.questionNotFound()
+  }
+
+
+  // todo 404 for no question found could use some improvement
+  questionNotFound() {
+    return (
+        <Container>
+          <h4>Sorry, that question could not be found!</h4>
+        </Container>
+    )
   }
 }
 
 function mapStateToProps({users, authedUser, questions}, props) {
-  //fixme this is a little hacky but needed based on the way this component is
-  // constructed... It either has to be inside a list where there won't be any
-  // path params so it needs to get the id from the props.id BUT if it's alone
-  // and not in a list, it needs to get the id from the path params.
-  // The resolution may be to extract QuestionInitial out and use that for the
-  // list, then that will create the Question component... not sure on this.
+  // get id from path params if present, otherwise use props
+  // this is set up this way because the list gives this component the id to use
+  // but once an individual question is displayed, the id is not received via
+  // the props, but the path params
+  // a little hacky, but it works
   let {id} = props.match.params
   let isListView = false
   if (!id) {
