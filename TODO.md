@@ -9,9 +9,6 @@
 - Question preview
 - Root Container size
 
-# Validation
-- Add question min length
-
 # Loading Spinner
 - Should help clean up some state null checks
 - This should allow for optimistic updates with questions/votes/etc

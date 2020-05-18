@@ -39,8 +39,18 @@ class AddQuestion extends Component {
 
   handleSubmit = () => {
     const {dispatch} = this.props;
+    if (!this.validEntry) {
+
+      return
+    }
     dispatch(handleAddQuestion(this.state.optionOne, this.state.optionTwo));
     this.props.history.push("/")
+  }
+
+  validEntry = () => {
+    const minLength = 5
+    return this.state.optionOne.length > minLength
+      && this.state.optionTwo.length > minLength
   }
 
   render() {
@@ -72,7 +82,10 @@ class AddQuestion extends Component {
                   />
                 </Card.Text>
               </Form>
-              <Button onClick={this.handleSubmit}>Submit</Button>
+              {/*todo add text indication of invalid entry*/}
+              <Button
+                  disabled={!this.validEntry()}
+                  onClick={this.handleSubmit}>Submit</Button>
             </Card.Body>
           </Card>
         </Container>
