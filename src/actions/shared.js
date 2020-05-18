@@ -3,8 +3,7 @@ import {receiveQuestions} from "./questions";
 import {setAuthedUser} from "./authedUser.js"
 import {getInitialData} from "../utils/api";
 
-//todo set to null after development
-const AUTHED_ID = "sarahedo"
+const AUTHED_ID = null
 
 export function handleInitialData() {
   return (dispatch) => {
