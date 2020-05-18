@@ -1,6 +1,3 @@
-# Unmet Requirements
-- Readme
-
 # Styling
 Will need a major refactor of components. There's a lot of duplication at each component that displays question information.
 - Create a user info display with avatar and name that can be used across items. Might consider using it for the navbar display portion. Have it take a bool for isSmall and set properties for it that way.

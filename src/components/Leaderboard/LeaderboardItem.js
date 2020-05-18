@@ -7,17 +7,24 @@ import FigureImage from "react-bootstrap/FigureImage";
 
 //todo styling
 class LeaderboardItem extends Component {
+
+  getPositionColor(position) {
+    switch (position) {
+      case 0: return "border-warning";
+      case 1: return "border-success";
+      case 2: return "border-info";
+      default: return "border-secondary";
+    }
+  }
+
   render() {
     const {user, score, position} = this.props
 
     return (
-        <Card>
-          <Card.Header>
-            Position: {position + 1}
-          </Card.Header>
+        <Card className={`mt-3 ${this.getPositionColor(position)}`}>
           <Card.Body>
             <Row>
-              <Col>
+              <Col className={"col-md-3"}>
                 <FigureImage
                     src={user.avatarURL}
                     width={150}
@@ -25,17 +32,9 @@ class LeaderboardItem extends Component {
                     roundedCircle
                 />
               </Col>
-              <Col>
-                <Row>
+              <Col className={"col-md-6"}>
+                <Row as={"h4"}>
                   {user.name}
-                </Row>
-                <Row className={"text-primary"}>
-                  <Col className={"col-9 text-left"}>
-                    Total Points
-                  </Col>
-                  <Col className={"col-3"}>
-                    {score}
-                  </Col>
                 </Row>
                 <Row>
                   <Col className={"col-9 text-left"}>
@@ -53,6 +52,16 @@ class LeaderboardItem extends Component {
                     {user.questions.length}
                   </Col>
                 </Row>
+              </Col>
+              <Col className={"col-md-3"}>
+                <Card>
+                  <Card.Header>Score</Card.Header>
+                  <Card.Body>
+                    <Card.Text>
+                      {score}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
               </Col>
             </Row>
           </Card.Body>
