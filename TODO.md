@@ -3,7 +3,6 @@
 - Redirect to homepage on login
 
 # Styling
-- Leaderboard (high priority)
 - Auth
 - Home (navigation bar is off)
 - Question preview

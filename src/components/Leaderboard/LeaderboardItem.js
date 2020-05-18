@@ -12,45 +12,51 @@ class LeaderboardItem extends Component {
 
     return (
         <Card>
-          <Row>
-            <Col>
-              <FigureImage
-                  src={user.avatarURL}
-                  width={150}
-                  height={150}
-                  roundedCircle
-              />
-            </Col>
-            <Col>
-              <Row as={"h4"}>
-                {user.name}
-              </Row>
-              <Row>
-                <Col>
-                  Answered Questions
-                </Col>
-                <Col>
-                  {Object.keys(user.answers).length}
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  Created Questions
-                </Col>
-                <Col>
-                  {user.questions.length}
-                </Col>
-              </Row>
-            </Col>
-            <Col>
-              <Row>
-                Position: {position + 1}
-              </Row>
-              <Row>
-                Score: {score}
-              </Row>
-            </Col>
-          </Row>
+          <Card.Header>
+            Position: {position + 1}
+          </Card.Header>
+          <Card.Body>
+            <Row>
+              <Col>
+                <FigureImage
+                    src={user.avatarURL}
+                    width={150}
+                    height={150}
+                    roundedCircle
+                />
+              </Col>
+              <Col>
+                <Row>
+                  {user.name}
+                </Row>
+                <Row className={"text-primary"}>
+                  <Col className={"col-9 text-left"}>
+                    Total Points
+                  </Col>
+                  <Col className={"col-3"}>
+                    {score}
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className={"col-9 text-left"}>
+                    Answered Questions
+                  </Col>
+                  <Col className={"col-3"}>
+                    {Object.keys(user.answers).length}
+                  </Col>
+                </Row>
+                <Row>
+                  <Col className={"col-9 text-left"}>
+                    Created Questions
+                  </Col>
+                  <Col className={"col-3"}>
+                    {user.questions.length}
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </Card.Body>
+
         </Card>
     );
   }

@@ -35,8 +35,8 @@ class Question extends Component {
                   <Col>
                     <FigureImage
                         src={creator.avatarURL}
-                        width={200}
-                        height={200}
+                        width={150}
+                        height={150}
                         roundedCircle
                     />
                   </Col>
