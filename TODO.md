@@ -2,7 +2,6 @@
 - Vote results need to highlight which option the current user selected
 - Readme
 - Redirect to homepage on login
-- Require login when entering information directly into address bar (because authedUser is not cached locally, so it should be null on a reload)
 
 # Styling
 - Leaderboard (high priority)
@@ -16,7 +15,6 @@
 - Invalid Question ID on path params
 
 # Auth
-- Redirect on not logged in
 - Check if this fixes invalid state on Question
 
 # Loading Spinner

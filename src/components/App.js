@@ -26,6 +26,7 @@ class App extends Component {
   }
 
   render() {
+    const {notAuthed} = this.props
     return (
         <Router>
           <div className="App">
@@ -33,24 +34,27 @@ class App extends Component {
               login
             </Button>
             <NavContainer/>
-            <div>
-              <Route exact path={"/"} component={Home}/>
-              <Route exact path={"/add"} component={NewQuestion}/>
-              <Route path={"/leaderboard"} component={Leaderboard}/>
-              <Route path={"/questions/:id"} component={Question}/>
-              <Route path={"/auth"} component={Auth}/>
-            </div>
+            {notAuthed && (
+                <Auth/>
+            )}
+            {!notAuthed && (
+                <div>
+                  <Route exact path={"/"} component={Home}/>
+                  <Route exact path={"/add"} component={NewQuestion}/>
+                  <Route path={"/leaderboard"} component={Leaderboard}/>
+                  <Route path={"/questions/:id"} component={Question}/>
+                  <Route path={"/auth"} component={Auth}/>
+                </div>
+            )}
           </div>
-
         </Router>
-
     );
   }
 }
 
 function mapStateToProps({authedUser}) {
   return {
-    loading: authedUser === null
+    notAuthed: !authedUser
   }
 }
 
