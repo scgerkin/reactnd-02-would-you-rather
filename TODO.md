@@ -1,5 +1,4 @@
 # Unmet Requirements
-- Vote results need to highlight which option the current user selected
 - Readme
 - Redirect to homepage on login
 

@@ -1,23 +1,20 @@
 import React from 'react';
+import {connect} from "react-redux";
 import Row from "react-bootstrap/Row";
 import QuestionResultItem from "./QuestionResultItem";
 
-//todo mark which option user chose
 function QuestionResults(props) {
-
-  const {optionOne, optionTwo} = props
+  const {optionOne, optionTwo, authedUser} = props
   const totalVotes = optionOne.votes.length + optionTwo.votes.length
 
   return (
       <div>
         <Row>
-          <h4>Results:</h4>
-        </Row>
-        <Row>
           <QuestionResultItem
               optionText={optionOne.text}
               numVotes={optionOne.votes.length}
               totalVotes={totalVotes}
+              isSelectedOption={optionOne.votes.includes(authedUser)}
           />
         </Row>
         <Row>
@@ -25,11 +22,17 @@ function QuestionResults(props) {
               optionText={optionTwo.text}
               numVotes={optionTwo.votes.length}
               totalVotes={totalVotes}
+              isSelectedOption={optionTwo.votes.includes(authedUser)}
           />
         </Row>
       </div>
   );
 }
 
+function mapStateToProps({authedUser}) {
+  return {
+    authedUser
+  }
+}
 
-export default QuestionResults;
+export default connect(mapStateToProps)(QuestionResults);
