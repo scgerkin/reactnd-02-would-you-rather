@@ -66,6 +66,7 @@ class Auth extends React.Component {
                 </Col>
                 <Col>
                   <Button
+                      disabled={this.state.selectedUser === ""}
                       onClick={this.onLogin}
                   >Login</Button>
                 </Col>
