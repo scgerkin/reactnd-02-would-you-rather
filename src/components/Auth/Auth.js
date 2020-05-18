@@ -7,12 +7,15 @@ import Button from "react-bootstrap/Button";
 import {setAuthedUser} from "../../actions/authedUser";
 import Col from "react-bootstrap/Col";
 import Dropdown from "react-bootstrap/Dropdown";
-import Form from "react-bootstrap/Form";
 
 //todo styling
 class Auth extends React.Component {
   state = {
     selectedUser: ""
+  }
+
+  onSelectUser = (id) => {
+    this.setState({selectedUser: id})
   }
 
   onLogin = () => {
@@ -45,32 +48,33 @@ class Auth extends React.Component {
                     roundedCircle
                 />
               </Col>
-              <Form>
-                <Col>
-                  <Form.Control as={"select"}>
-                    <Dropdown.Item
-                        as={"option"}
-                        key={"blank"}
-                        onSelect={()=>this.setState({selectedUser: ""})}
-                    >Select a user...</Dropdown.Item>
+              <Col>
+                {/*Todo This is really  ugly and needs better styling
+                    Unfortunately, the previous implementation didn't work on
+                    Chrome, only Firefox, so this is a work around.
+                */}
+                <Dropdown>
+                  <Dropdown.Toggle id={"select-user-dropdown"}>
+                    Select a user...
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
                     {userIds.map(id => (
                         <Dropdown.Item
-                            as={"option"}
+                            // as={"option"}
                             key={id}
-                            onSelect={()=>this.setState({selectedUser: id})}
+                            eventKey={id}
+                            onSelect={() => this.onSelectUser(id)}
                         >
                           {users[id].name}
                         </Dropdown.Item>
                     ))}
-                  </Form.Control>
-                </Col>
-                <Col>
-                  <Button
-                      disabled={this.state.selectedUser === ""}
-                      onClick={this.onLogin}
-                  >Login</Button>
-                </Col>
-              </Form>
+                  </Dropdown.Menu>
+                </Dropdown>
+                <Button
+                    disabled={this.state.selectedUser === ""}
+                    onClick={this.onLogin}
+                >Login</Button>
+              </Col>
             </Card.Body>
           </Card>
         </Container>
