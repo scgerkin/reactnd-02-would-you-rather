@@ -1,7 +1,7 @@
 import {receiveUsers} from "./users";
 import {receiveQuestions} from "./questions";
 import {setAuthedUser} from "./authedUser.js"
-import {getInitialData} from "../utils/api";
+import {getInitialData} from "../api/wyr-api";
 
 const AUTHED_ID = 'sarahedo'
 

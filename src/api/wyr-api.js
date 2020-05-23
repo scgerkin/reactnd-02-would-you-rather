@@ -2,6 +2,16 @@ import Axios from "axios"
 
 import {endpoint} from "../config/config"
 
+export function getInitialData() {
+  return Promise.all([
+    getRecentQuestions(),
+    getUsers(["sarahedo", "johndoe","tylermcginnis"])
+  ]).then(([questions, users]) => ({
+    users,
+    questions
+  }))
+}
+
 export async function getRecentQuestions() {
   const response = await Axios.get(`${endpoint}/questions`, {
     headers: {
