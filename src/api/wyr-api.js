@@ -63,3 +63,54 @@ export async function putQuestionVote({authedUser, qid, answer}) {
       })
   console.log(response)
 }
+
+export async function getUser(userId) {
+  const response = await Axios.get(`${endpoint}/users/${userId}`,
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+  return {[response.data.payload.userId]: formatUser(response.data.payload)}
+}
+
+export async function getUsers(userIds) {
+  const response = await Axios.post(`${endpoint}/users/list`,
+      {
+        userIds: userIds
+      },
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+  )
+  let users = {}
+  response.data.payload.forEach(item => {
+    users = {
+      ...users,
+      [item.userId]: formatUser(item)
+    }
+  })
+  console.log(users)
+  return users
+}
+
+function formatUser(user) {
+
+  let answers = {}
+  user.answers.forEach(item => {
+    answers = {
+      ...answers,
+      [item.questionId]: item.answer
+    }
+  })
+
+  return {
+    id: user.userId,
+    name: user.name,
+    avatarURL: user.avatarUrl,
+    answers: answers,
+    questions: user.questions
+  }
+}

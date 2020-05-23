@@ -1,7 +1,4 @@
-import {
-  _getUsers
-} from "./_DATA.js"
-import {getRecentQuestions, postNewQuestion, putQuestionVote} from "../api/wyr-api";
+import {getRecentQuestions, getUsers, postNewQuestion, putQuestionVote} from "../api/wyr-api";
 
 /***
  * TODO Remove and refactor this once API integrated
@@ -17,9 +14,9 @@ import {getRecentQuestions, postNewQuestion, putQuestionVote} from "../api/wyr-a
  */
 export function getInitialData() {
   return Promise.all([
-      _getUsers(),
-      getRecentQuestions()
-  ]).then(([users, questions]) => ({
+    getRecentQuestions(),
+    getUsers(["sarahedo", "johndoe","tylermcginnis"])
+  ]).then(([questions, users]) => ({
     users,
     questions
   }))

@@ -2,16 +2,13 @@ import React, {Component} from 'react';
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 
-import {postNewQuestion} from "../../api/wyr-api";
+import {getUsers} from "../../api/wyr-api";
 
 class TestStage extends Component {
   render() {
     return (
         <Container>
-          <Button onClick={()=> postNewQuestion({
-            optionOneText:"one1111",
-            optionTwoText:"two2222",
-            author:"fakeUser"})}>Test Clicky</Button>
+          <Button onClick={()=> getUsers(["sarahedo", "johndoe"])}>Test Clicky</Button>
         </Container>
     );
   }
