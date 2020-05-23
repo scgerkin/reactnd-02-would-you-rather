@@ -23,7 +23,6 @@ export function getInitialData() {
 
 export function saveQuestion(info) {
   return postNewQuestion(info.optionOneText, info.optionTwoText)
-  //return _saveQuestion(info);
 }
 
 export function saveQuestionAnswer(info) {
