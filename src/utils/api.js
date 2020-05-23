@@ -3,6 +3,11 @@ import {
 } from "./_DATA.js"
 import {getRecentQuestions, postNewQuestion, putQuestionVote} from "../api/wyr-api";
 
+/***
+ * TODO Remove and refactor this once API integrated
+ *  This is acting as a wrapper for the moment because actions are calling from
+ *  this at the moment
+ */
 
 /**
  * Will need to get questions first
@@ -22,7 +27,7 @@ export function getInitialData() {
 
 
 export function saveQuestion(info) {
-  return postNewQuestion(info.optionOneText, info.optionTwoText)
+  return postNewQuestion(info)
 }
 
 export function saveQuestionAnswer(info) {
