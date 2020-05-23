@@ -1,4 +1,4 @@
-import {saveQuestion, saveQuestionAnswer} from "../utils/api";
+import {postNewQuestion, putQuestionVote} from "../api/wyr-api";
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
 export const ADD_QUESTION = "ADD_QUESTION";
@@ -21,7 +21,7 @@ function addQuestion(question) {
 export function handleAddQuestion(optionOne, optionTwo) {
   return (dispatch, getState) => {
     const {authedUser} = getState();
-    return saveQuestion({
+    return postNewQuestion({
       optionOneText: optionOne,
       optionTwoText: optionTwo,
       author: authedUser
@@ -46,7 +46,7 @@ export function handleVote(authedUser, qid, answer) {
     }
 
     //todo handle this optimistically
-    return saveQuestionAnswer(info)
+    return putQuestionVote(info)
         .then(dispatch(vote(info)))
         .catch((error) => {
           handleErrorOnSaveQuestionAnswer(error);
