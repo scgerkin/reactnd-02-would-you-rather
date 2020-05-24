@@ -2,14 +2,22 @@ import Axios from "axios"
 
 import {endpoint} from "../config/config"
 
-export function getInitialData() {
-  return Promise.all([
-    getRecentQuestions(),
-    getUsers(["sarahedo", "johndoe","tylermcginnis", "103290008345052138905"])
-  ]).then(([questions, users]) => ({
-    users,
-    questions
-  }))
+export function getInitialQuestions() {
+  return Promise
+      .resolve(getRecentQuestions())
+      .then((questions) => ({questions}))
+}
+
+export function getInitialUsers(questions) {
+  return Promise
+      .resolve(getUsersFromQuestions(questions))
+      .then((users) => ({users}))
+}
+
+//this is a mess
+function getUsersFromQuestions(questions) {
+  const keys = Object.keys(questions)
+  return getUsers([...new Set(keys.map(key => questions[key].author))])
 }
 
 export async function getRecentQuestions() {
