@@ -27,6 +27,7 @@ ReactDOM.render(
           domain={auth0config.domain}
           client_id={auth0config.clientId}
           redirect_uri={window.location.origin}
+          audience={auth0config.audience}
           onRedirectCallback={onRedirectCallback}
       >
 

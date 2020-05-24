@@ -10,15 +10,20 @@ import Row from "react-bootstrap/Row";
 function LoginLogout(props) {
   const {reduxUser, dispatch} = props
   const {name, avatarURL} = reduxUser ? reduxUser : {name: "", avatarURL: ""};
-  const {user, isAuthenticated, loginWithPopup, logout} = useAuth0();
+  const {user, isAuthenticated, loginWithPopup, logout, getTokenSilently} = useAuth0();
 
   if (isAuthenticated && !reduxUser) {
     //fixme user is not retrieved by auth0 if refreshing on non-OAuth user
     // this is a hacky fix
     if (!user) {
       logout()
+    } else {
+      Promise.resolve(getTokenSilently()).then((token) => {
+        console.log(token)
+        dispatch(handleLogin(user.sub.split("|")[1], token))
+      })
     }
-    dispatch(handleLogin(user.sub.split("|")[1]))
+
   }
 
   //fixme logging in stretches the screen beyond the navbar
