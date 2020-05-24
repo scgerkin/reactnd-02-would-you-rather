@@ -1,6 +1,14 @@
 import {ADD_QUESTION, VOTE} from "./questions";
 
 export const RECEIVE_USERS = "RECEIVE_USERS";
+export const ADD_USER = "ADD_USER";
+
+export function addUser(user) {
+  return {
+    type: ADD_USER,
+    user
+  }
+}
 
 export function receiveUsers(users) {
   return {

@@ -4,7 +4,7 @@ import {useAuth0} from "../../auth/react-auth0-spa";
 import Navbar from "react-bootstrap/Navbar";
 import FigureImage from "react-bootstrap/FigureImage";
 import Button from "react-bootstrap/Button";
-import {setAuthedUser} from "../../actions/authedUser";
+import {handleLogin} from "../../actions/shared";
 
 function LoginLogout(props) {
   const {reduxUser, dispatch} = props
@@ -15,7 +15,7 @@ function LoginLogout(props) {
   if (isAuthenticated && !reduxUser) {
     console.log("is authenticated but not user")
     console.log(user)
-    dispatch(setAuthedUser(user.sub.split("|")[1]))
+    dispatch(handleLogin(user.sub.split("|")[1]))
   }
 
   if (isAuthenticated && !!reduxUser) {

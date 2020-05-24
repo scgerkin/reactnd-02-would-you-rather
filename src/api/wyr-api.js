@@ -89,6 +89,7 @@ export async function getUser(userId) {
           "Content-Type": "application/json"
         }
       })
+  console.log(response)
   return {[response.data.payload.userId]: formatUser(response.data.payload)}
 }
 
