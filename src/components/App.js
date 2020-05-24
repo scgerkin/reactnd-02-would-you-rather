@@ -9,7 +9,6 @@ import Auth from "./Auth/Auth";
 import NewQuestion from "./Questions/AddQuestion";
 import {handleInitialData} from "../actions/shared";
 import Question from "./Questions/Question";
-import LoginLogout from "./Auth/LoginLogout";
 
 // TODO Loading bar/spinner
 // TODO Decide on container sizes ...?based on media
@@ -23,7 +22,6 @@ class App extends Component {
     return (
         <Router>
           <div className="App">
-            <LoginLogout/>
             <NavContainer/>
             {notAuthed && (
                 <Auth/>

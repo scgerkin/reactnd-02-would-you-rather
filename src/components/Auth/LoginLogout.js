@@ -5,11 +5,12 @@ import Navbar from "react-bootstrap/Navbar";
 import FigureImage from "react-bootstrap/FigureImage";
 import Button from "react-bootstrap/Button";
 import {handleLogin} from "../../actions/shared";
+import Row from "react-bootstrap/Row";
 
 function LoginLogout(props) {
   const {reduxUser, dispatch} = props
   const {name, avatarURL} = reduxUser ? reduxUser : {name: "", avatarURL: ""};
-  const { user, isAuthenticated, loginWithPopup, logout } = useAuth0();
+  const {user, isAuthenticated, loginWithPopup, logout} = useAuth0();
 
   if (isAuthenticated && !reduxUser) {
     //fixme user is not retrieved by auth0 if refreshing on non-OAuth user
@@ -20,9 +21,10 @@ function LoginLogout(props) {
     dispatch(handleLogin(user.sub.split("|")[1]))
   }
 
+  //fixme logging in stretches the screen beyond the navbar
   if (isAuthenticated && !!reduxUser) {
     return (
-        <div>
+        <Row>
           <Navbar.Text>{name}&nbsp;</Navbar.Text>
           <FigureImage
               src={avatarURL}
@@ -30,21 +32,21 @@ function LoginLogout(props) {
               height={30}
               roundedCircle/>
           <div>&nbsp;&nbsp;</div>
-          <Button variant="outline-danger" onClick={logout}>Logout</Button>
-        </div>
+          <Button variant="outline-light" onClick={logout}>Logout</Button>
+        </Row>
     )
   } else {
     return (
-        <div>
-          <Button variant="outline-danger" onClick={loginWithPopup}>Login</Button>
-        </div>
+        <Row>
+          <Button variant="outline-light" onClick={loginWithPopup}>Login</Button>
+        </Row>
     )
   }
 }
 
 function mapStateToProps({authedUser, users}) {
   return {
-    reduxUser: authedUser  ? users[authedUser] : null
+    reduxUser: authedUser ? users[authedUser] : null
   }
 }
 
