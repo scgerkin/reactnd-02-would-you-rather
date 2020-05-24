@@ -11,10 +11,12 @@ function LoginLogout(props) {
   const {name, avatarURL} = reduxUser ? reduxUser : {name: "", avatarURL: ""};
   const { user, isAuthenticated, loginWithPopup, logout } = useAuth0();
 
-  //todo this is SUPER hacky but it seems to work
   if (isAuthenticated && !reduxUser) {
-    console.log("is authenticated but not user")
-    console.log(user)
+    //fixme user is not retrieved by auth0 if refreshing on non-OAuth user
+    // this is a hacky fix
+    if (!user) {
+      logout()
+    }
     dispatch(handleLogin(user.sub.split("|")[1]))
   }
 
