@@ -20,11 +20,12 @@ function addQuestion(question) {
 
 export function handleAddQuestion(optionOne, optionTwo) {
   return (dispatch, getState) => {
-    const {authedUser} = getState();
+    const {authedUser, token} = getState();
     return postNewQuestion({
       optionOneText: optionOne,
       optionTwoText: optionTwo,
-      author: authedUser
+      author: authedUser,
+      token: token
     }).then((question) => dispatch(addQuestion(question)));
   }
 }
@@ -37,12 +38,13 @@ function vote(info) {
 }
 
 export function handleVote(authedUser, qid, answer) {
-  return (dispatch) => {
-
+  return (dispatch, getState) => {
+    const {token} = getState()
     const info = {
       authedUser,
       qid,
-      answer
+      answer,
+      token
     }
 
     //todo handle this optimistically

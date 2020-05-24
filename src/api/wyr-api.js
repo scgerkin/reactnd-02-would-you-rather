@@ -45,7 +45,7 @@ export async function getRecentQuestions() {
 //todo error handle?
 // I think the action should handle actual errors, but if the response doesn't
 // contain the correct information, it'll give the state garbage and fail silently
-export async function postNewQuestion({optionOneText, optionTwoText, author}) {
+export async function postNewQuestion({optionOneText, optionTwoText, author, token}) {
   const response = await Axios.post(`${endpoint}/questions`,
       {
         "optionOneText": optionOneText,
@@ -54,6 +54,7 @@ export async function postNewQuestion({optionOneText, optionTwoText, author}) {
       },
       {
         headers: {
+          "Authorization": `Bearer ${token}`,
           "Content-Type": "application/json"
         }
       })
@@ -68,7 +69,7 @@ export async function postNewQuestion({optionOneText, optionTwoText, author}) {
 }
 
 //  todo finishimplementing
-export async function putQuestionVote({authedUser, qid, answer}) {
+export async function putQuestionVote({authedUser, qid, answer, token}) {
   const response = await Axios.put(`${endpoint}/questions`,
       {
         "questionId": qid,
@@ -77,6 +78,7 @@ export async function putQuestionVote({authedUser, qid, answer}) {
       },
       {
         headers: {
+          "Authorization": `Bearer ${token}`,
           "Content-Type": "application/json"
         }
       })
