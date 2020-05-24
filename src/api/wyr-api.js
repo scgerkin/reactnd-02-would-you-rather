@@ -5,7 +5,7 @@ import {endpoint} from "../config/config"
 export function getInitialData() {
   return Promise.all([
     getRecentQuestions(),
-    getUsers(["sarahedo", "johndoe","tylermcginnis"])
+    getUsers(["sarahedo", "johndoe","tylermcginnis", "103290008345052138905"])
   ]).then(([questions, users]) => ({
     users,
     questions

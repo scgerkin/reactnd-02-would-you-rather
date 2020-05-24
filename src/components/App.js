@@ -9,7 +9,7 @@ import Auth from "./Auth/Auth";
 import NewQuestion from "./Questions/AddQuestion";
 import {handleInitialData} from "../actions/shared";
 import Question from "./Questions/Question";
-import TestStage from "./test/test_stage";
+import LoginLogout from "./Auth/LoginLogout";
 
 // TODO Loading bar/spinner
 // TODO Decide on container sizes ...?based on media
@@ -23,8 +23,7 @@ class App extends Component {
     return (
         <Router>
           <div className="App">
-            {/*FIXME remove after API integration*/}
-            <TestStage/>
+            <LoginLogout/>
             <NavContainer/>
             {notAuthed && (
                 <Auth/>

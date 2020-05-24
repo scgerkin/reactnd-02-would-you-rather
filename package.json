@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@auth0/auth0-spa-js": "^1.8.1",
+    "@types/history": "^4.7.6",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "react": "^16.13.1",
@@ -41,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "history": "^4.10.1"
   }
 }

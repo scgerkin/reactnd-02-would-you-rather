@@ -3,7 +3,7 @@ import {receiveQuestions} from "./questions";
 import {setAuthedUser} from "./authedUser.js"
 import {getInitialData} from "../api/wyr-api";
 
-const AUTHED_ID = 'sarahedo'
+const AUTHED_ID = '103290008345052138905'
 
 export function handleInitialData() {
   return (dispatch) => {
