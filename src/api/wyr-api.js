@@ -30,7 +30,7 @@ export async function getRecentQuestions() {
   let questions = {}
 
   response.data.payload.map(item => {
-    questions[item.questionId] = {
+    return questions[item.questionId] = {
       id: item.questionId,
       timestamp: item.createdAt,
       author: item.authorId,
