@@ -11,8 +11,6 @@ export function handleInitialData() {
       dispatch(setAuthedUser(AUTHED_ID))
       dispatch(receiveQuestions(questions))
       getInitialUsers(questions).then(({users}) => {
-        console.log("handleInitialData")
-        console.log(users)
         dispatch(receiveUsers(users))
       })
     })
@@ -23,8 +21,6 @@ export function handleLogin(userId) {
   return (dispatch) => {
     return getUser(userId)
         .then((user) => {
-          console.log("inside handle login")
-          console.log(user)
           dispatch(addUser(user))
         })
         .then(() => dispatch(setAuthedUser(userId)))

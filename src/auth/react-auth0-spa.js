@@ -4,6 +4,7 @@ import createAuth0Client from "@auth0/auth0-spa-js";
 const DEFAULT_REDIRECT_CALLBACK = () =>
     window.history.replaceState({}, document.title, window.location.pathname);
 
+//todo figure out how to inject redux state and use that to dispatch logins
 export const Auth0Context = React.createContext();
 export const useAuth0 = () => useContext(Auth0Context);
 export const Auth0Provider = ({
@@ -35,9 +36,6 @@ export const Auth0Provider = ({
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
         setUser(user);
-        console.log("isAuthenticated")
-        console.log(user)
-        //setAuthedUser(user)
       }
 
       setLoading(false);
@@ -58,8 +56,6 @@ export const Auth0Provider = ({
     const user = await auth0Client.getUser();
     setUser(user);
     setIsAuthenticated(true);
-    console.log("loginWithPopup")
-    console.log(user)
   };
 
   const handleRedirectCallback = async () => {

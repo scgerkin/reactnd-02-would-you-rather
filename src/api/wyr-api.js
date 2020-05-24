@@ -67,6 +67,7 @@ export async function postNewQuestion({optionOneText, optionTwoText, author}) {
   }
 }
 
+//  todo finishimplementing
 export async function putQuestionVote({authedUser, qid, answer}) {
   const response = await Axios.put(`${endpoint}/questions`,
       {
@@ -89,7 +90,6 @@ export async function getUser(userId) {
           "Content-Type": "application/json"
         }
       })
-  console.log(response)
   return {[response.data.payload.userId]: formatUser(response.data.payload)}
 }
 
@@ -111,7 +111,6 @@ export async function getUsers(userIds) {
       [item.userId]: formatUser(item)
     }
   })
-  console.log(users)
   return users
 }
 

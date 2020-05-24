@@ -13,8 +13,6 @@ export default function users(state = {}, action) {
 
 function handleAddUserToState(state, action) {
   const user = action.user
-  console.log(user)
-  console.log(user.id)
   return {
     ...state,
     ...user
