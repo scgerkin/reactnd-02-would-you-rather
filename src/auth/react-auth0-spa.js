@@ -35,6 +35,9 @@ export const Auth0Provider = ({
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
         setUser(user);
+        console.log("isAuthenticated")
+        console.log(user)
+        //setAuthedUser(user)
       }
 
       setLoading(false);
@@ -55,6 +58,8 @@ export const Auth0Provider = ({
     const user = await auth0Client.getUser();
     setUser(user);
     setIsAuthenticated(true);
+    console.log("loginWithPopup")
+    console.log(user)
   };
 
   const handleRedirectCallback = async () => {

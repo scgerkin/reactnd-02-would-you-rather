@@ -4,13 +4,21 @@ import {useAuth0} from "../../auth/react-auth0-spa";
 import Navbar from "react-bootstrap/Navbar";
 import FigureImage from "react-bootstrap/FigureImage";
 import Button from "react-bootstrap/Button";
+import {setAuthedUser} from "../../actions/authedUser";
 
 function LoginLogout(props) {
-  const {user} = props
-  const {name, avatarURL} = user ? user : {name: "", avatarURL: ""};
-  const { isAuthenticated, loginWithPopup, logout } = useAuth0();
+  const {reduxUser, dispatch} = props
+  const {name, avatarURL} = reduxUser ? reduxUser : {name: "", avatarURL: ""};
+  const { user, isAuthenticated, loginWithPopup, logout } = useAuth0();
 
-  if (isAuthenticated && !!user) {
+  //todo this is SUPER hacky but it seems to work
+  if (isAuthenticated && !reduxUser) {
+    console.log("is authenticated but not user")
+    console.log(user)
+    dispatch(setAuthedUser(user.sub.split("|")[1]))
+  }
+
+  if (isAuthenticated && !!reduxUser) {
     return (
         <div>
           <Navbar.Text>{name}&nbsp;</Navbar.Text>
@@ -34,7 +42,7 @@ function LoginLogout(props) {
 
 function mapStateToProps({authedUser, users}) {
   return {
-    user: authedUser  ? users[authedUser] : null
+    reduxUser: authedUser  ? users[authedUser] : null
   }
 }
 

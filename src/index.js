@@ -7,7 +7,7 @@ import {Provider} from "react-redux";
 import reducer from "./reducers";
 import middleware from "./middleware";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Auth0Provider } from "./auth/react-auth0-spa";
+import {Auth0Provider} from "./auth/react-auth0-spa";
 import {auth0config} from "./config/config"
 import history from "./utils/history";
 
@@ -22,15 +22,16 @@ const onRedirectCallback = appState => {
 };
 
 ReactDOM.render(
-    <Auth0Provider
-        domain={auth0config.domain}
-        client_id={auth0config.clientId}
-        redirect_uri={window.location.origin}
-        onRedirectCallback={onRedirectCallback}
-    >
-      <Provider store={store}>
+    <Provider store={store}>
+      <Auth0Provider
+          domain={auth0config.domain}
+          client_id={auth0config.clientId}
+          redirect_uri={window.location.origin}
+          onRedirectCallback={onRedirectCallback}
+      >
+
         <App/>
-      </Provider>
-    </Auth0Provider>,
+      </Auth0Provider>
+    </Provider>,
     document.getElementById('root')
 );
