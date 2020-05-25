@@ -1,4 +1,4 @@
-import {ADD_USER, RECEIVE_USERS} from "../actions/users";
+import {ADD_USER, RECEIVE_USERS, UPDATE_USER} from "../actions/users";
 import {ADD_QUESTION, VOTE} from "../actions/questions";
 
 export default function users(state = {}, action) {
@@ -7,6 +7,7 @@ export default function users(state = {}, action) {
     case ADD_USER: return handleAddUserToState(state, action);
     case ADD_QUESTION: return handleAddQuestionToUser(state, action);
     case VOTE: return handleAddVoteToUser(state, action);
+    case UPDATE_USER: return handleUpdateUser(state, action);
     default: return state;
   }
 }
@@ -47,5 +48,13 @@ function handleAddVoteToUser(state, action) {
         [questionId]: action.info.answer
       }
     }
+  }
+}
+
+function handleUpdateUser(state, action) {
+  const user = action.user
+  return {
+    ...state,
+    ...user
   }
 }

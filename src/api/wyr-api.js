@@ -83,6 +83,7 @@ export async function putQuestionVote({authedUser, qid, answer, token}) {
         }
       })
   console.log(response)
+  return response.data.payload
 }
 
 export async function getUser(userId) {
@@ -114,6 +115,34 @@ export async function getUsers(userIds) {
     }
   })
   return users
+}
+
+export async function updateUser(token, user) {
+  const response = await Axios.put(`${endpoint}/users`, {
+    user: user
+  }, {
+    headers: {
+      'Content-Type': 'application/json',
+      "Authorization": `Bearer ${token}`
+    }
+  })
+  return formatUser(response.data.payload)
+}
+
+export async function getUploadUrl(token, ext) {
+  const response = await Axios.get(`${endpoint}/users/uploadUrl?ext=${ext}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": `Bearer ${token}`
+        }
+  })
+  return response.data.payload
+}
+
+export async function uploadFile(uploadUrl, file) {
+  const response = await Axios.put(uploadUrl, file)
+  console.log(response)
 }
 
 function formatUser(user) {
