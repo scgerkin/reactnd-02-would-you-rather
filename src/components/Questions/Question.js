@@ -21,7 +21,11 @@ class Question extends Component {
   }
 
   render() {
-    const {hasVoted, id, isListView, creator, question} = this.props;
+    const {hasVoted, id, isListView, question} = this.props;
+    let {creator} = this.props
+    if (!creator) {
+      creator = "null"
+    }
 
     if (!!question) {
       const questionPreview = this.formatQuestionPreview(question.optionOne.text)
@@ -101,11 +105,18 @@ function mapStateToProps({users, authedUser, questions}, props) {
         || question.optionTwo.votes.includes(authedUser)
   }
 
+  let creator
+  if (!users) {
+    creator = "NULL"
+  } else {
+    creator = users[question.author]
+  }
+
   return {
     hasVoted,
     id,
     isListView,
-    creator: question ? users[question.author]: null,
+    creator: creator,
     question: question ? question : null
   }
 }
