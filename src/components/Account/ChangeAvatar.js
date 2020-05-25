@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
 import {handleChangeAvatar} from "../../actions/users";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -49,11 +50,9 @@ class ChangeAvatar extends Component {
     this.setUploadState(UPLOADING_FILE)
     dispatch(handleChangeAvatar(this.state.file, ext))
     this.setState(({file: undefined, fileWindowText: "Select a new image file"}))
-    alert("File is being uploaded! This is still under development. The avatar will update" +
-        " automatically once the upload is complete. Thank you for your patience!\n\n" +
-        "I'm hoping that this message is long enough, and that you read it, that by the time" +
-        " you're finished, the upload will be finished! :)")
     this.setUploadState(NO_UPLOAD)
+    alert("File is being uploaded! Your avatar will update automatically when finished.")
+    this.props.history.push("/")
   }
 
   setUploadState(uploadState) {
@@ -102,4 +101,4 @@ function mapStateToProps({users, authedUser}) {
   }
 }
 
-export default connect(mapStateToProps)(ChangeAvatar);
+export default withRouter(connect(mapStateToProps)(ChangeAvatar));
