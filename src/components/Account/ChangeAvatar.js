@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {handleChangeAvatar} from "../../actions/users";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import FigureImage from "react-bootstrap/FigureImage";
 
 const NO_UPLOAD = "NO_UPLOAD"
 const UPLOADING_FILE = "UPLOADING_FILE"
@@ -10,7 +11,8 @@ const UPLOADING_FILE = "UPLOADING_FILE"
 class ChangeAvatar extends Component {
   state = {
     file: undefined,
-    uploadState: NO_UPLOAD
+    uploadState: NO_UPLOAD,
+    fileWindowText: "Select a new image file"
   }
 
   handleFileChange = (event) => {
@@ -18,7 +20,10 @@ class ChangeAvatar extends Component {
     if (!files) {
       return
     }
-    this.setState({file: files[0]})
+    this.setState({
+      file: files[0],
+      fileWindowText: files[0].name
+    })
   }
 
   handleSubmit = (event) => {
@@ -52,11 +57,12 @@ class ChangeAvatar extends Component {
   }
 
   render() {
+    const {avatarUrl} = this.props
     return (
         <div>
           <Form.File
               id={"avatarUpload"}
-              label={"Select a new image file"}
+              label={this.state.fileWindowText}
               onChange={this.handleFileChange}
               custom
           />

@@ -6,28 +6,21 @@ import Form from "react-bootstrap/Form";
 import ChangeAvatar from "./ChangeAvatar";
 import Button from "react-bootstrap/Button";
 import {handleChangeDisplayName} from "../../actions/users";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import FigureImage from "react-bootstrap/FigureImage";
 
 const DISPLAY_NAME = "DISPLAY_NAME"
 
 class AccountContainer extends Component {
   state = {
-    displayName: "",
-    avatarUrl: ""
-  }
-
-  static getDerivedStateFromProps(props, state) {
-    const {avatarUrl} = props
-    return {
-      ...state,
-      avatarUrl: avatarUrl
-    }
+    displayName: ""
   }
 
   handleChange = (event) => {
     const value = event.target.value;
     this.setState((currentState) => ({
-      displayName: value,
-      avatarUrl: currentState.avatarUrl
+      displayName: value
     }))
   }
 
@@ -40,24 +33,55 @@ class AccountContainer extends Component {
   }
 
   render() {
-    const {currentName} = this.props
+    const {user} = this.props
+
+
     return (
-        <Container className={"mc-auto"}>
+        <Container className={"mt-3 mc-auto"}>
           <Card className={"mx-auto"}>
-            {this.state.avatarUrl}<br/>
-            <Form>
-              <Form.Control
-                  id={DISPLAY_NAME}
-                  type={"text"}
-                  placeholder={currentName}
-                  onChange={this.handleChange}
-              />
-              <Button
-                  onClick={this.onSubmitName}
-                  disabled={!validName(this.state.displayName)}
-              >Submit</Button>
-              <ChangeAvatar/>
-            </Form>
+            <Card.Body>
+              <Row>
+                <Col className={"col-md-3"}>
+                  <FigureImage
+                      src={user.avatarURL}
+                      width={150}
+                      height={150}
+                      roundedCircle
+                  />
+                </Col>
+                <Col className={"col-md-9"}>
+                  <Row as={"h4"}>
+                    Display Name: {user.name}
+                  </Row>
+                  <Form>
+                    <Row>
+                      <Col>
+                        <Form.Control
+                            id={DISPLAY_NAME}
+                            type={"text"}
+                            placeholder={user.name}
+                            onChange={this.handleChange}
+                        />
+
+                        <Button
+                            onClick={this.onSubmitName}
+                            disabled={!validName(this.state.displayName)}
+                        >Change</Button>
+                      </Col>
+                    </Row>
+                  </Form>
+                </Col>
+              </Row>
+              <Row>
+
+              </Row>
+
+
+            </Card.Body>
+
+
+            <ChangeAvatar/>
+
           </Card>
         </Container>
     );
@@ -65,15 +89,16 @@ class AccountContainer extends Component {
 }
 
 function mapStateToProps({users, authedUser}) {
-  if (!!users[authedUser]) {
-    return {
-      currentName: users[authedUser].name,
-      avatarUrl: users[authedUser].avatarURL
-    }
-  }
   return {
-    currentName: "",
-    avatarUrl: ""
+    user: !!users[authedUser]
+        ? users[authedUser]
+        : {
+          id: "null",
+          name: "null",
+          avatarUrl: "null",
+          answers: {},
+          questions: []
+        }
   }
 }
 

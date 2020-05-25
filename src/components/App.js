@@ -24,18 +24,18 @@ class App extends Component {
         <Router>
           <div className="App">
             <NavContainer/>
-            <AccountContainer/>
-            {/*{notAuthed && (*/}
-            {/*    <Auth/>*/}
-            {/*)}*/}
-            {/*{!notAuthed && (*/}
-            {/*    <div>*/}
-            {/*      <Route exact path={"/"} component={Home}/>*/}
-            {/*      <Route exact path={"/add"} component={NewQuestion}/>*/}
-            {/*      <Route path={"/leaderboard"} component={Leaderboard}/>*/}
-            {/*      <Route path={"/questions/:id"} component={Question}/>*/}
-            {/*    </div>*/}
-            {/*)}*/}
+            {notAuthed && (
+                <Auth/>
+            )}
+            {!notAuthed && (
+                <div>
+                  <Route exact path={"/"} component={Home}/>
+                  <Route exact path={"/add"} component={NewQuestion}/>
+                  <Route path={"/leaderboard"} component={Leaderboard}/>
+                  <Route path={"/questions/:id"} component={Question}/>
+                  <Route path={"/account"} component={AccountContainer}/>
+                </div>
+            )}
           </div>
         </Router>
     );

@@ -15,13 +15,13 @@ function NavContainer() {
         <Navbar.Collapse>
           <Nav className={"mr-auto"}>
             <LinkContainer exact to={"/"}>
-              <Nav.Link>Home</Nav.Link>
+              <Nav.Link active={false}>Home</Nav.Link>
             </LinkContainer>
             <LinkContainer exact to={"/add"}>
-              <Nav.Link>New Question</Nav.Link>
+              <Nav.Link active={false}>New Question</Nav.Link>
             </LinkContainer>
             <LinkContainer to={"/leaderboard"}>
-              <Nav.Link>Leader Board</Nav.Link>
+              <Nav.Link active={false}>Leader Board</Nav.Link>
             </LinkContainer>
           </Nav>
           <LoginLogout/>
