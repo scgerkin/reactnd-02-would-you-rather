@@ -10,7 +10,8 @@ const UPLOADING_FILE = "UPLOADING_FILE"
 class ChangeAvatar extends Component {
   state = {
     file: undefined,
-    uploadState: NO_UPLOAD
+    uploadState: NO_UPLOAD,
+    fileWindowText: "Select a new image file"
   }
 
   handleFileChange = (event) => {
@@ -18,7 +19,10 @@ class ChangeAvatar extends Component {
     if (!files) {
       return
     }
-    this.setState({file: files[0]})
+    this.setState({
+      file: files[0],
+      fileWindowText: files[0].name
+    })
   }
 
   handleSubmit = (event) => {
@@ -44,6 +48,11 @@ class ChangeAvatar extends Component {
     // the button change state working correctly
     this.setUploadState(UPLOADING_FILE)
     dispatch(handleChangeAvatar(this.state.file, ext))
+    this.setState(({file: undefined, fileWindowText: "Select a new image file"}))
+    alert("File is being uploaded! This is still under development. The avatar will update" +
+        " automatically once the upload is complete. Thank you for your patience!\n\n" +
+        "I'm hoping that this message is long enough, and that you read it, that by the time" +
+        " you're finished, the upload will be finished! :)")
     this.setUploadState(NO_UPLOAD)
   }
 
@@ -56,7 +65,7 @@ class ChangeAvatar extends Component {
         <div>
           <Form.File
               id={"avatarUpload"}
-              label={"Select a new image file"}
+              label={this.state.fileWindowText}
               onChange={this.handleFileChange}
               custom
           />

@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {useAuth0} from "../../auth/react-auth0-spa";
+import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar";
+import {LinkContainer} from 'react-router-bootstrap';
 import FigureImage from "react-bootstrap/FigureImage";
 import Button from "react-bootstrap/Button";
 import {handleLogin} from "../../actions/shared";
@@ -26,19 +28,24 @@ function LoginLogout(props) {
 
   }
 
-  //fixme logging in stretches the screen beyond the navbar
   if (isAuthenticated && !!reduxUser) {
     return (
-        <Row>
-          <Navbar.Text>{name}&nbsp;</Navbar.Text>
-          <FigureImage
-              src={avatarURL}
-              width={30}
-              height={30}
-              roundedCircle/>
-          <div>&nbsp;&nbsp;</div>
-          <Button variant="outline-light" onClick={logout}>Logout</Button>
-        </Row>
+        <Navbar bg={"dark"} variant={"dark"}>
+          <Nav>
+            <LinkContainer to={"/account"}>
+              <Nav.Link
+                  active={false}
+              >{name}</Nav.Link>
+            </LinkContainer>
+            <FigureImage
+                src={avatarURL}
+                width={30}
+                height={30}
+                roundedCircle/>
+            <div>&nbsp;&nbsp;</div>
+            <Button variant="outline-light" onClick={logout}>Logout</Button>
+          </Nav>
+        </Navbar>
     )
   } else {
     return (
