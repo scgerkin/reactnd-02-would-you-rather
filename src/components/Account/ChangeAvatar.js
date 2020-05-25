@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import {handleChangeAvatar} from "../../actions/users";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import FigureImage from "react-bootstrap/FigureImage";
 
 const NO_UPLOAD = "NO_UPLOAD"
 const UPLOADING_FILE = "UPLOADING_FILE"
@@ -49,6 +48,11 @@ class ChangeAvatar extends Component {
     // the button change state working correctly
     this.setUploadState(UPLOADING_FILE)
     dispatch(handleChangeAvatar(this.state.file, ext))
+    this.setState(({file: undefined, fileWindowText: "Select a new image file"}))
+    alert("File is being uploaded! This is still under development. The avatar will update" +
+        " automatically once the upload is complete. Thank you for your patience!\n\n" +
+        "I'm hoping that this message is long enough, and that you read it, that by the time" +
+        " you're finished, the upload will be finished! :)")
     this.setUploadState(NO_UPLOAD)
   }
 
@@ -57,7 +61,6 @@ class ChangeAvatar extends Component {
   }
 
   render() {
-    const {avatarUrl} = this.props
     return (
         <div>
           <Form.File
