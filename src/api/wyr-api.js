@@ -93,7 +93,7 @@ export async function getUser(userId) {
           "Content-Type": "application/json"
         }
       })
-  return {[response.data.payload.userId]: formatUser(response.data.payload)}
+  return {[response.data.payload.userId]: formatUserFromApi(response.data.payload)}
 }
 
 export async function getUsers(userIds) {
@@ -111,7 +111,7 @@ export async function getUsers(userIds) {
   response.data.payload.forEach(item => {
     users = {
       ...users,
-      [item.userId]: formatUser(item)
+      [item.userId]: formatUserFromApi(item)
     }
   })
   return users
@@ -119,14 +119,14 @@ export async function getUsers(userIds) {
 
 export async function updateUser(token, user) {
   const response = await Axios.put(`${endpoint}/users`, {
-    user: user
+      "name":user.name
   }, {
     headers: {
       'Content-Type': 'application/json',
       "Authorization": `Bearer ${token}`
     }
   })
-  return formatUser(response.data.payload)
+  return formatUserFromApi(response.data.payload)
 }
 
 export async function getUploadUrl(token, ext) {
@@ -145,7 +145,7 @@ export async function uploadFile(uploadUrl, file) {
   console.log(response)
 }
 
-function formatUser(user) {
+function formatUserFromApi(user) {
 
   let answers = {}
   user.answers.forEach(item => {
