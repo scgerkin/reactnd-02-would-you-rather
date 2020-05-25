@@ -1,7 +1,9 @@
 import {postNewQuestion, putQuestionVote} from "../api/wyr-api";
+import {deleteQuestion as apiDelete} from "../api/wyr-api"
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
 export const ADD_QUESTION = "ADD_QUESTION";
+export const DELETE_QUESTION = "DELETE_QUESTION";
 export const VOTE = "VOTE";
 
 export function receiveQuestions(questions) {
@@ -27,6 +29,20 @@ export function handleAddQuestion(optionOne, optionTwo) {
       author: authedUser,
       token: token
     }).then((question) => dispatch(addQuestion(question)));
+  }
+}
+
+function deleteQuestion(questionId) {
+  return {
+    type: DELETE_QUESTION,
+    questionId
+  }
+}
+
+export function handleDeleteQuestion(questionId) {
+  return (dispatch, getState) => {
+    const {token} = getState()
+    return apiDelete(questionId, token).then(() => dispatch(deleteQuestion(questionId)))
   }
 }
 

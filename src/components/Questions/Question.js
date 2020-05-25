@@ -21,7 +21,7 @@ class Question extends Component {
   }
 
   render() {
-    const {hasVoted, id, isListView, question} = this.props;
+    const {hasVoted, id, isListView, question, isOwner} = this.props;
     let {creator} = this.props
     if (!creator) {
       creator = "null"
@@ -46,7 +46,7 @@ class Question extends Component {
                   </Col>
                   <Col>
                     {isListView && (
-                        <QuestionInitial displayText={questionPreview} id={id}/>
+                        <QuestionInitial displayText={questionPreview} id={id} isOwner={isOwner}/>
                     )}
                     {!isListView && hasVoted && (
                         <QuestionResults
@@ -98,11 +98,14 @@ function mapStateToProps({users, authedUser, questions}, props) {
   //todo handle invalid id
   const question = questions[id];
 
-  let hasVoted = false;
+  let hasVoted = false
+  let isOwner = false
   if (!!question) {
     hasVoted =
         question.optionOne.votes.includes(authedUser)
         || question.optionTwo.votes.includes(authedUser)
+
+    isOwner = question.author === authedUser
   }
 
   let creator
@@ -114,6 +117,7 @@ function mapStateToProps({users, authedUser, questions}, props) {
 
   return {
     hasVoted,
+    isOwner,
     id,
     isListView,
     creator: creator,

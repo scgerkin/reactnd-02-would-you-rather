@@ -1,4 +1,4 @@
-import {ADD_QUESTION, RECEIVE_QUESTIONS, VOTE} from "../actions/questions";
+import {ADD_QUESTION, DELETE_QUESTION, RECEIVE_QUESTIONS, VOTE} from "../actions/questions";
 
 /**
  * Handles Question actions with the state.
@@ -12,6 +12,8 @@ export default function questions(state = {}, action) {
       return handleReceiveQuestions(state, action);
     case ADD_QUESTION:
       return handleAddQuestion(state, action);
+    case DELETE_QUESTION:
+      return handleDeleteQuestion(state, action);
     case VOTE:
       return handleVoteState(state, action);
     default:
@@ -43,6 +45,15 @@ function handleAddQuestion(state, action) {
   return {
     ...state,
     [question.id]: question
+  }
+}
+
+function handleDeleteQuestion(state, action) {
+  const deleteId = action.questionId
+  const keepIds = Object.keys(state).filter(key => key !== deleteId)
+  const newState = keepIds.map(key => state[key])
+  return {
+    ...newState
   }
 }
 
