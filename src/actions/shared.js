@@ -7,9 +7,9 @@ import {setToken} from "./token";
 // override these to start as "logged in" without authenticating with Auth0 on reload
 // this is NOT a safe operation and can break several components if the user doesn't
 // have existing information in the database (including created questions)
-//import {AUTHED_ID, TOKEN} from "../.secret/testauth"
-const AUTHED_ID = null
-const TOKEN = null
+import {AUTHED_ID, TOKEN} from "../.secret/testauth"
+// const AUTHED_ID = null
+// const TOKEN = null
 
 export function handleInitialData() {
   return (dispatch) => {

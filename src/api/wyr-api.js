@@ -68,7 +68,6 @@ export async function postNewQuestion({optionOneText, optionTwoText, author, tok
   }
 }
 
-//  todo finishimplementing
 export async function putQuestionVote({authedUser, qid, answer, token}) {
   const response = await Axios.put(`${endpoint}/questions`,
       {
@@ -82,7 +81,15 @@ export async function putQuestionVote({authedUser, qid, answer, token}) {
           "Content-Type": "application/json"
         }
       })
-  console.log(response)
+  return response.data.payload
+}
+
+export async function deleteQuestion(questionId, token) {
+  const response = await Axios.delete(`${endpoint}/questions/${questionId}`, {
+    headers: {
+      "Authorization": `Bearer ${token}`
+    }
+  })
   return response.data.payload
 }
 
@@ -119,7 +126,7 @@ export async function getUsers(userIds) {
 
 export async function updateUser(token, user) {
   const response = await Axios.put(`${endpoint}/users`, {
-      "name":user.name
+    "name": user.name
   }, {
     headers: {
       'Content-Type': 'application/json',
@@ -136,7 +143,7 @@ export async function getUploadUrl(token, ext) {
           'Content-Type': 'application/json',
           "Authorization": `Bearer ${token}`
         }
-  })
+      })
   return response.data.payload
 }
 
